@@ -57,7 +57,7 @@ const ProjectCard = ({
       <CardContent className="p-4 sm:p-6 flex flex-col flex-grow">
         <h3 className="text-lg sm:text-xl font-semibold mb-2">{title}</h3>
         <p className="text-gray-400 mb-6 flex-grow text-sm sm:text-base">{description}</p>
-        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 mt-auto">
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 mt-auto w-full">
           <Button 
             className="bg-teal text-dark hover:bg-teal/80 text-xs sm:text-sm w-full"
             asChild
@@ -68,7 +68,7 @@ const ProjectCard = ({
           </Button>
           <Button 
             variant="outline" 
-            className="border-gray-dark hover:bg-gray-dark/30 text-xs sm:text-sm w-full"
+            className="border-gray-dark hover:bg-gray-dark/30 text-xs sm:text-sm w-full truncate"
             asChild
           >
             <a href={codeUrl} target="_blank" rel="noopener noreferrer">
