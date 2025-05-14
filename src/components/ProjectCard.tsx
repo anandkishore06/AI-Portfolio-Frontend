@@ -26,7 +26,7 @@ const ProjectCard = ({
   return (
     <Card 
       className={cn(
-        "glass-card overflow-hidden transition-all duration-500 hover:shadow-[0_0_25px_rgba(78,205,196,0.1)] group border-gray-dark",
+        "glass-card overflow-hidden transition-all duration-500 hover:shadow-[0_0_25px_rgba(78,205,196,0.1)] group border-gray-dark h-full flex flex-col",
         "opacity-0 animate-fade-in",
       )}
       style={{ animationDelay: `${index * 150}ms`, animationFillMode: 'forwards' }}
@@ -42,11 +42,11 @@ const ProjectCard = ({
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-dark to-transparent opacity-60"></div>
         </div>
-        <div className="absolute top-4 left-4 flex flex-wrap gap-2">
+        <div className="absolute top-2 left-2 sm:top-4 sm:left-4 flex flex-wrap gap-1 sm:gap-2 max-w-[90%]">
           {tags.map((tag, i) => (
             <span 
               key={i} 
-              className="px-2 py-1 text-xs font-semibold rounded-full bg-dark/70 backdrop-blur-sm text-teal"
+              className="px-2 py-1 text-xs font-semibold rounded-full bg-dark/70 backdrop-blur-sm text-teal whitespace-nowrap"
             >
               {tag}
             </span>
@@ -54,12 +54,12 @@ const ProjectCard = ({
         </div>
       </div>
       
-      <CardContent className="p-6">
-        <h3 className="text-xl font-semibold mb-2">{title}</h3>
-        <p className="text-gray-400 mb-6 line-clamp-2">{description}</p>
-        <div className="flex gap-3">
+      <CardContent className="p-4 sm:p-6 flex flex-col flex-grow">
+        <h3 className="text-lg sm:text-xl font-semibold mb-2">{title}</h3>
+        <p className="text-gray-400 mb-6 flex-grow text-sm sm:text-base">{description}</p>
+        <div className="flex gap-2 sm:gap-3 mt-auto">
           <Button 
-            className="bg-teal text-dark hover:bg-teal/80 text-sm flex-1"
+            className="bg-teal text-dark hover:bg-teal/80 text-xs sm:text-sm flex-1"
             asChild
           >
             <a href={demoUrl} target="_blank" rel="noopener noreferrer">
@@ -68,7 +68,7 @@ const ProjectCard = ({
           </Button>
           <Button 
             variant="outline" 
-            className="border-gray-dark hover:bg-gray-dark/30 text-sm flex-1"
+            className="border-gray-dark hover:bg-gray-dark/30 text-xs sm:text-sm flex-1"
             asChild
           >
             <a href={codeUrl} target="_blank" rel="noopener noreferrer">
