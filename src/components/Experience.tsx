@@ -182,7 +182,7 @@ const Experience = () => {
               asChild
             >
               <a
-                href="/path-to-your-resume.pdf"
+                href="Resume_Anand.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 download="My_Resume.pdf"
