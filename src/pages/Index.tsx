@@ -33,11 +33,14 @@ const Index = () => {
     setIsTyping(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/ai", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: query }),
-      });
+      const res = await fetch(
+        "https://ai-portfolio-backend-647g.onrender.com/api/ai",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: query }),
+        }
+      );
 
       const data = await res.json();
       const { section, response } = data;
@@ -131,7 +134,7 @@ const Index = () => {
             >
               {msg.sender === "ai" && (
                 <img
-                  src="/bot-avatar.png"
+                  src="bot.png"
                   alt="AI Avatar"
                   className="w-6 h-6 rounded-full"
                 />
@@ -179,7 +182,7 @@ const Index = () => {
               </div>
               {msg.sender === "user" && (
                 <img
-                  src="/user-avatar.png"
+                  src="user.png"
                   alt="User Avatar"
                   className="w-6 h-6 rounded-full"
                 />
@@ -189,7 +192,7 @@ const Index = () => {
           {isTyping && (
             <div className="flex items-center gap-2 text-sm text-gray-300 px-2">
               <img
-                src="/bot-avatar.png"
+                src="bot.png"
                 alt="AI Avatar"
                 className="w-6 h-6 rounded-full"
               />
