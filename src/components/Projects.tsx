@@ -1,58 +1,65 @@
-
-import React from 'react';
-import ProjectCard from './ProjectCard';
+import React, { useState } from "react";
+import ProjectCard from "./ProjectCard";
+import ComingSoonModal from "./ComingSoonModal";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 
 const Projects = () => {
+  const [showModal, setShowModal] = useState(false);
   const projects = [
     {
-      title: "E-Commerce Platform",
-      description: "A full-featured online shopping experience with cart, checkout, and payment integration.",
-      tags: ["React", "Node.js", "MongoDB"],
-      imageUrl: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80",
-      demoUrl: "#",
-      codeUrl: "#",
+      title: "VChat Application",
+      description:
+        "Smart real-time chat with AI-based suggestions, sentiment detection, and modern UI.",
+      tags: ["React", "Node.js", "Express.js", "MongoDB", "AI"],
+      imageUrl: "chat.png",
+      demoUrl: "https://vchat-app-6.onrender.com",
+      codeUrl: "https://github.com/anandkishore06/VChat-App",
     },
     {
-      title: "Task Management App",
-      description: "A productivity application for organizing tasks with drag-and-drop functionality.",
-      tags: ["TypeScript", "React", "Firebase"],
-      imageUrl: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80",
-      demoUrl: "#",
-      codeUrl: "#",
+      title: "Sorting Visualizer App",
+      description:
+        "Interactive sorting visualizer showcasing algorithms with speed and color transitions.",
+      tags: ["TypeScript", "React", "Sorting Algorithm"],
+      imageUrl: "image.png",
+      demoUrl: "https://sorting-algorithm-app.onrender.com/",
+      codeUrl: "https://github.com/anandkishore06/Sorting-Algorithm-App",
     },
     {
-      title: "Portfolio Website",
-      description: "A responsive portfolio website showcasing projects and skills.",
+      title: "AI Portfolio Website",
+      description:
+        "A dynamic AI-powered portfolio showcasing skills, projects, and intelligent interaction.",
       tags: ["React", "Tailwind CSS", "Framer Motion"],
-      imageUrl: "https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80",
+      imageUrl:
+        "https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80",
       demoUrl: "#",
       codeUrl: "#",
     },
     {
       title: "Weather Application",
-      description: "Real-time weather updates with location detection and forecast visualization.",
-      tags: ["React", "API", "Chart.js"],
-      imageUrl: "https://images.unsplash.com/photo-1592210454359-9043f067919b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80",
-      demoUrl: "#",
-      codeUrl: "#",
-    },
-    {
-      title: "Social Media Dashboard",
-      description: "Analytics dashboard for monitoring social media engagement and performance.",
-      tags: ["React", "Redux", "Express"],
-      imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80",
-      demoUrl: "#",
-      codeUrl: "#",
-    },
-    {
-      title: "Music Streaming App",
-      description: "Online music player with playlists, recommendations, and social sharing.",
-      tags: ["React Native", "Node.js", "MongoDB"],
-      imageUrl: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80",
-      demoUrl: "#",
-      codeUrl: "#",
+      description:
+        "AI-powered weather app providing forecasts, alerts, and personalized insights.",
+      tags: ["React", "API", "AI", "Chart.js"],
+      imageUrl:
+        "https://images.unsplash.com/photo-1592210454359-9043f067919b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80",
+      demoUrl: "https://ai-powered-weather-app-kmai.onrender.com/",
+      codeUrl: "https://github.com/anandkishore06/AI-Powered-Weather-App",
     },
   ];
+
+  const handleProjectClick = (project) => {
+    if (project.demoUrl === "#" && project.codeUrl === "#") {
+      // Just show the popup, no new tab
+      setShowModal(true);
+    } else {
+      // Open the demo or code in a new tab
+      const url = project.demoUrl !== "#" ? project.demoUrl : project.codeUrl;
+      window.open(url, "_blank");
+    }
+  };
 
   return (
     <section id="projects" className="section-padding">
@@ -63,27 +70,98 @@ const Projects = () => {
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-teal to-amber mx-auto"></div>
           <p className="text-gray-400 mt-6 max-w-2xl mx-auto">
-            Showcasing my best work across web development and design. Each project represents unique challenges and creative solutions.
+            Showcasing my best work across web development and design. Each
+            project represents unique challenges and creative solutions.
           </p>
         </div>
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+
+        <Swiper
+          modules={[Navigation, Pagination, Autoplay]}
+          spaceBetween={20}
+          slidesPerView={1}
+          pagination={{ clickable: true }}
+          autoplay={{ delay: 3000 }}
+          grabCursor={true} // ✅ enables swipe cursor
+          breakpoints={{
+            640: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+          }}
+          className="pb-10"
+        >
           {projects.map((project, index) => (
-            <ProjectCard
-              key={index}
-              index={index}
-              title={project.title}
-              description={project.description}
-              tags={project.tags}
-              imageUrl={project.imageUrl}
-              demoUrl={project.demoUrl}
-              codeUrl={project.codeUrl}
-            />
+            <SwiperSlide key={index}>
+              <ProjectCard
+                index={index}
+                title={project.title}
+                description={project.description}
+                tags={project.tags}
+                imageUrl={project.imageUrl}
+                demoUrl={project.demoUrl}
+                codeUrl={project.codeUrl}
+                onDemoClick={() => {
+                  if (project.demoUrl === "#") setShowModal(true);
+                  else window.open(project.demoUrl, "_blank");
+                }}
+                onCodeClick={() => {
+                  if (project.codeUrl === "#") setShowModal(true);
+                  else window.open(project.codeUrl, "_blank");
+                }}
+              />
+            </SwiperSlide>
           ))}
-        </div>
+        </Swiper>
       </div>
+
+      {/* Modal Component */}
+      <ComingSoonModal isOpen={showModal} onClose={() => setShowModal(false)} />
     </section>
   );
+  // return (
+  //   <Swiper
+  //     modules={[Navigation, Pagination, Autoplay]}
+  //     spaceBetween={30}
+  //     slidesPerView={1}
+  //     loop={true}
+  //     pagination={{ clickable: true }}
+  //     navigation={true}
+  //     autoplay={{ delay: 3500 }}
+  //     breakpoints={{
+  //       640: { slidesPerView: 1 },
+  //       768: { slidesPerView: 2 },
+  //       1024: { slidesPerView: 3 },
+  //     }}
+  //     className="mySwiper"
+  //   >
+  //     {projects.map((project, index) => (
+  //       <SwiperSlide key={index}>
+  //         <ProjectCard
+  //           index={index}
+  //           title={project.title}
+  //           description={project.description}
+  //           tags={project.tags}
+  //           imageUrl={project.imageUrl}
+  //           demoUrl={project.demoUrl}
+  //           codeUrl={project.codeUrl}
+  //           onDemoClick={() => {
+  //             if (project.demoUrl === "#") {
+  //               setShowModal(true);
+  //             } else {
+  //               window.open(project.demoUrl, "_blank");
+  //             }
+  //           }}
+  //           onCodeClick={() => {
+  //             if (project.codeUrl === "#") {
+  //               setShowModal(true);
+  //             } else {
+  //               window.open(project.codeUrl, "_blank");
+  //             }
+  //           }}
+  //         />
+  //       </SwiperSlide>
+  //     ))}
+  //   </Swiper>
+  // );
 };
 
 export default Projects;

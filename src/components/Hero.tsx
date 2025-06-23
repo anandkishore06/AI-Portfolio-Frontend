@@ -79,8 +79,7 @@ const Hero = () => {
             "text-gray-400 text-lg md:text-xl mb-8 transition-all duration-1000 delay-300",
             isVisible ? "opacity-100" : "opacity-0 translate-y-10"
           )}>
-            Crafting beautiful digital experiences with a focus on 
-            clean design and seamless functionality.
+            Creating efficient and user-centric digital experiences with a focus on clean design and seamless functionality .
           </p>
           
           <div className={cn(
