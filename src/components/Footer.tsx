@@ -10,7 +10,7 @@ const Footer = () => {
           {/* Left Column */}
           <div className="w-full md:w-1/2">
             <div className="font-bold text-2xl gradient-text mb-3">
-              &#123;AK&#125; Portfolio.
+              &#123;AK&#125; AI Portfolio.
             </div>
             <p className="text-gray-400 max-w-full md:max-w-md">
               Creating beautiful digital experiences that leave a lasting
@@ -92,7 +92,7 @@ const Footer = () => {
             </div>
 
             <p className="text-gray-400">
-              &copy; {currentYear} &#123;AK&#125; Portfolio. All rights
+              &copy; {currentYear} &#123;AK&#125; AI Portfolio. All rights
               reserved.
             </p>
           </div>

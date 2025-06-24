@@ -52,7 +52,10 @@ const Index = () => {
         "experience",
         "contact",
         "fun",
+        "greeting",
+        "personal",
       ];
+
       const sectionExists = validSections.includes(section);
 
       const aiMessage: Message = {
@@ -129,7 +132,7 @@ const Index = () => {
         {/* Embedded Chat Section */}
         {/* <div className="mt-10 w-full border border-gray-700 rounded-xl shadow-xl p-4 flex flex-col"> */}
         <div className="mt-10 mb-24 w-full border border-gray-700 rounded-xl shadow-xl p-4 flex flex-col">
-          <div className="overflow-y-auto max-h-[700px] pr-2">
+          <div className="overflow-y-auto max-h-[900px] pr-2">
             {chatHistory.map((msg, index) => (
               <div
                 key={index}
@@ -144,6 +147,7 @@ const Index = () => {
                     className="w-6 h-6 rounded-full mt-1"
                   />
                 )}
+
                 <div
                   className={`p-2 rounded-lg text-sm text-left max-w-6xl ${
                     msg.sender === "user"
@@ -151,40 +155,55 @@ const Index = () => {
                       : "text-gray-100 rounded-bl-none w-full max-w-6xl text-left"
                   }`}
                 >
-                  {msg.content}
+                  {/* Only render plain text if it's NOT one of the component sections */}
+                  {[
+                    "projects",
+                    "about",
+                    "experience",
+                    "skills",
+                    "contact",
+                    "personal",
+                  ].includes(msg.section || "") === false && (
+                    <p>{msg.content}</p>
+                  )}
+
                   {msg.section === "projects" && (
-                    <div className="mt-4 w-full">
+                    <div className="mt-4 w-full space-y-2">
+                      <p>{msg.content}</p>
                       <Projects />
                     </div>
                   )}
                   {msg.section === "about" && (
-                    <div className="mt-4 w-full">
+                    <div className="mt-4 w-full space-y-2">
+                      <p>{msg.content}</p>
                       <About />
                     </div>
                   )}
                   {msg.section === "experience" && (
-                    <div className="mt-4 w-full">
+                    <div className="mt-4 w-full space-y-2">
+                      <p>{msg.content}</p>
                       <Experience />
                     </div>
                   )}
                   {msg.section === "skills" && (
-                    <div className="mt-4 w-full">
+                    <div className="mt-4 w-full space-y-2">
+                      <p>{msg.content}</p>
                       <Skills />
                     </div>
                   )}
                   {msg.section === "contact" && (
-                    <div className="mt-4 w-full">
+                    <div className="mt-4 w-full space-y-2">
+                      <p>{msg.content}</p>
                       <Contact />
                     </div>
                   )}
-
-                  {msg.section === "fun" && (
-                    <p>Here's something fun coming soon! 🎉</p>
-                  )}
-                  {msg.section === "notfound" && (
-                    <p>Sorry, I didn’t understand that.</p>
+                  {msg.section === "personal" && (
+                    // <div className="mt-4 w-full">
+                    <p>{msg.content}</p>
+                    // </div>
                   )}
                 </div>
+
                 {msg.sender === "user" && (
                   <img
                     src="user.png"
