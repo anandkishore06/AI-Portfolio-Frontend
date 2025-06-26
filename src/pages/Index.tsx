@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import { SendHorizontal } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import About from "@/components/About";
 import Experience from "@/components/Experience";
@@ -7,6 +8,7 @@ import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import Skills from "@/components/Skills";
+import Hero from "@/components/Hero";
 
 interface Message {
   sender: "user" | "ai";
@@ -177,6 +179,36 @@ const Index = () => {
   //     hasInitialScroll.current = true; // mark that initial scroll has happened
   //   }
   // }, [chatHistory, isTyping, isUserScrolling, hasInteracted]);
+  const professions = [
+    "A passionate Full Stack Developer who loves building end-to-end solutions 💻",
+    "A creative MERN Stack Engineer focused on scalable web applications 🚀",
+    "An AI Integration Specialist blending intelligence with user experience 🤖",
+    "A detail-oriented Frontend Developer crafting pixel-perfect UIs with React ✨",
+    "A Backend Developer experienced in building robust and secure APIs 🔐",
+
+    "A UI/UX-Conscious Developer designing intuitive digital experiences 🎨",
+    "A Cloud-Native Developer deploying apps on scalable infrastructures ☁️",
+    "A Curious Technologist always exploring new tools and technologies 🔍",
+    "A Performance-Driven Engineer optimizing every layer of the stack ⚙️",
+    "A Team Player and fast learner with a love for problem-solving 🧠",
+    "A Developer who bridges design and code to deliver engaging user journeys 🌐",
+  ];
+
+  // const [currentProfession, setCurrentProfession] = useState("");
+  const indexRef = useRef(0);
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentProfession, setCurrentProfession] = useState(professions[0]);
+  useEffect(() => {
+    setCurrentProfession(professions[currentIndex]);
+  }, [currentIndex]);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % professions.length);
+    }, 3000); // rotate every 3 seconds
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div
@@ -226,16 +258,9 @@ const Index = () => {
 
       <main className="flex-grow px-4 text-center" id="home">
         <div className="mt-32 md:mt-40 flex flex-col items-center justify-center gap-6 px-4 md:px-0">
-          <motion.img
-            src="pic.png"
-            alt="avatar"
-            className="w-28 h-28 sm:w-36 sm:h-36 md:w-48 md:h-48 rounded-full shadow-xl object-cover"
-            initial={{ scale: 0.7, rotate: -10, opacity: 0 }}
-            animate={{ scale: 1, rotate: 0, opacity: 1 }}
-            transition={{ duration: 0.9, ease: "easeOut" }}
-          />
+          {/* <Hero /> */}
           <motion.h1
-            className="text-xl sm:text-2xl md:text-4xl font-bold"
+            className="text-xl sm:text-xl md:text-3xl font-semibold text-white"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
@@ -243,13 +268,48 @@ const Index = () => {
             Hey, I'm Anand 👋
           </motion.h1>
           <motion.h2
+            key={currentProfession}
+            className="text-base sm:text-lg md:text-xl gradient-text font-medium"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.6, delay: currentIndex === 0 ? 0 : 0.2 }}
+          >
+            {currentProfession}
+          </motion.h2>
+
+          <motion.img
+            src="img1.png"
+            alt="avatar"
+            // className="w-28 h-28 sm:w-36 sm:h-36 md:w-48 md:h-48 rounded-full object-cover"
+            className="w-44 h-44 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-full"
+            initial={{ scale: 0.7, rotate: -10, opacity: 0 }}
+            animate={{ scale: 1, rotate: 0, opacity: 1 }}
+            transition={{ duration: 0.9, ease: "easeOut" }}
+          />
+
+          {/* <motion.h2
             className="text-sm sm:text-lg md:text-2xl font-semibold text-gray-300"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
             Ask me anything about my portfolio
-          </motion.h2>
+          </motion.h2> */}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="relative bg-zinc-800 border border-gray-600 text-white px-5 py-3 rounded-2xl shadow-md max-w-fit text-sm sm:text-base md:text-lg mt-4"
+          >
+            Ask me anything about my{" "}
+            <span className="text-blue-400 font-semibold">projects</span>,{" "}
+            <span className="text-purple-400 font-semibold">skills</span>,{" "}
+            <span className="text-pink-400 font-semibold">experience</span>,{" "}
+            <span className="text-green-400 font-semibold">fun facts</span>, or{" "}
+            <span className="text-amber font-semibold">how to reach me</span> ✨
+            <div className="absolute -bottom-2 left-6 w-4 h-4 bg-zinc-800 border-l border-b border-gray-600 rotate-45"></div>
+          </motion.div>
         </div>
 
         {/* Embedded Chat Section */}
@@ -355,7 +415,7 @@ const Index = () => {
 
           <div className="relative mt-4 w-full max-w-xl mx-auto">
             <input
-              className="border border-gray-600 rounded-lg px-4 py-2 w-full text-white bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-gray-800 pr-28 shadow-lg"
+              className="border border-gray-600 rounded-2xl px-4 py-2 w-full text-white bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-gray-800 pr-28 shadow-lg"
               placeholder="Ask me anything..."
               value={chatInput}
               onChange={(e) => setChatInput(e.target.value)}
@@ -366,7 +426,7 @@ const Index = () => {
                 }
               }}
             />
-            <button
+            {/* <button
               // onClick={() => handleQuery(chatInput)}
               onClick={() => {
                 if (chatInput.trim() !== "") {
@@ -376,6 +436,12 @@ const Index = () => {
               className="absolute top-1/2 right-2 transform -translate-y-1/2 gradient-text hover:bg-blue-700 px-4 py-1 rounded-md text-sm font-medium shadow-md border border-zinc-300"
             >
               Ask
+            </button> */}
+            <button
+              onClick={() => chatInput.trim() && handleQuery(chatInput)}
+              className="absolute top-1/2 right-3 transform -translate-y-1/2 hover:bg-zinc-800 transition-colors duration-200 p-2 rounded-full shadow-md"
+            >
+              <SendHorizontal className="w-5 h-5 text-white" />
             </button>
           </div>
 
