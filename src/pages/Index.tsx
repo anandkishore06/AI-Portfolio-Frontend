@@ -17,12 +17,21 @@ interface Message {
 const Index = () => {
   const [selectedSection, setSelectedSection] = useState<string | null>(null);
   const [chatInput, setChatInput] = useState("");
+  const [isUserScrolling, setIsUserScrolling] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
+  const [showFooter, setShowFooter] = useState(true);
+  const [showInitialPopup, setShowInitialPopup] = useState(() => {
+    return !localStorage.getItem("ai-popup-dismissed");
+  });
+
   const [chatHistory, setChatHistory] = useState<Message[]>(() => {
     const saved = localStorage.getItem("chatHistory");
     return saved ? JSON.parse(saved) : [];
   });
   const [isTyping, setIsTyping] = useState(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
+  const hasInitialScroll = useRef(false);
 
   const handleQuery = async (query: string) => {
     const userMessage: Message = { sender: "user", content: query };
@@ -31,7 +40,7 @@ const Index = () => {
     localStorage.setItem("chatHistory", JSON.stringify(updatedHistory));
     setChatInput("");
     setIsTyping(true);
-
+    if (!hasInteracted) setHasInteracted(true);
     try {
       const res = await fetch(
         "https://ai-portfolio-backend-647g.onrender.com/api/ai",
@@ -80,6 +89,8 @@ const Index = () => {
       setChatHistory(errorHistory);
       localStorage.setItem("chatHistory", JSON.stringify(errorHistory));
     }
+    if (!hasInteracted) setHasInteracted(true);
+
     setIsTyping(false);
   };
 
@@ -88,11 +99,84 @@ const Index = () => {
     localStorage.removeItem("chatHistory");
   };
 
+  // useEffect(() => {
+  //   if (chatHistory.length > 0) {
+  //     chatEndRef.current?.scrollIntoView({ behavior: "auto" });
+  //   }
+  // }, [chatHistory, isTyping]);
   useEffect(() => {
-    if (chatHistory.length > 0) {
-      chatEndRef.current?.scrollIntoView({ behavior: "auto" });
-    }
-  }, [chatHistory, isTyping]);
+    const container = chatContainerRef.current;
+
+    const handleScroll = () => {
+      if (!container) return;
+      const { scrollTop, scrollHeight, clientHeight } = container;
+      const atBottom = scrollTop + clientHeight >= scrollHeight - 10;
+      setIsUserScrolling(!atBottom);
+    };
+
+    container?.addEventListener("scroll", handleScroll);
+
+    return () => {
+      container?.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+  useEffect(() => {
+    const handleScroll = () => {
+      const chatContainer = chatContainerRef.current;
+      if (!chatContainer) return;
+
+      const chatRect = chatContainer.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      // Check if chat is fully visible or overflowing
+      const chatIsFullyVisible = chatRect.bottom <= windowHeight;
+      const userScrolledBelowChat = chatRect.bottom < windowHeight - 50;
+
+      // Show footer only if:
+      // - user hasn’t interacted (initial visit), or
+      // - user has scrolled below the chat
+      if (!hasInteracted || userScrolledBelowChat) {
+        setShowFooter(true);
+      } else {
+        setShowFooter(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // run on mount too
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [hasInteracted]);
+
+  useEffect(() => {
+    const container = chatContainerRef.current;
+    if (!container) return;
+
+    container.scrollTo({
+      top: container.scrollHeight,
+      behavior: hasInitialScroll.current ? "smooth" : "auto",
+    });
+
+    hasInitialScroll.current = true;
+  }, [chatHistory.length]);
+
+  // useEffect(() => {
+  //   const container = chatContainerRef.current;
+
+  //   if (!container) return;
+
+  //   const shouldScroll =
+  //     (!isUserScrolling && hasInteracted) || !hasInitialScroll.current;
+
+  //   if (shouldScroll) {
+  //     container.scrollTo({
+  //       top: container.scrollHeight,
+  //       behavior: hasInitialScroll.current ? "smooth" : "auto",
+  //     });
+
+  //     hasInitialScroll.current = true; // mark that initial scroll has happened
+  //   }
+  // }, [chatHistory, isTyping, isUserScrolling, hasInteracted]);
 
   return (
     <div
@@ -100,6 +184,45 @@ const Index = () => {
       className="min-h-screen flex flex-col overflow-x-hidden text-white"
     >
       <Navbar />
+      {showInitialPopup && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm z-50"
+        >
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ type: "spring", stiffness: 200, damping: 20 }}
+            className="bg-gradient-to-br from-zinc-900 to-zinc-800 border border-gray-700 text-white rounded-2xl shadow-2xl p-6 sm:p-8 max-w-md w-[90%] sm:w-full relative"
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <div className="bg-yellow-400 text-black rounded-full w-10 h-10 flex items-center justify-center text-xl font-bold shadow-lg">
+                ⚠️
+              </div>
+              <h2 className="text-xl font-semibold">Heads up!</h2>
+            </div>
+            <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
+              The AI might take up to{" "}
+              <strong className="text-white">30 seconds</strong> to respond on
+              your first message. It's hosted on{" "}
+              <span className="font-medium text-blue-400">Render</span> which
+              may put the backend to sleep when idle.
+            </p>
+
+            <button
+              onClick={() => {
+                setShowInitialPopup(false);
+                localStorage.setItem("ai-popup-dismissed", "true");
+              }}
+              className="mt-6 w-full bg-blue-600 hover:bg-blue-700 transition-colors duration-200 text-white font-medium px-4 py-2 rounded-lg shadow-md"
+            >
+              Got it, let’s chat!
+            </button>
+          </motion.div>
+        </motion.div>
+      )}
 
       <main className="flex-grow px-4 text-center" id="home">
         <div className="mt-32 md:mt-40 flex flex-col items-center justify-center gap-6 px-4 md:px-0">
@@ -132,7 +255,11 @@ const Index = () => {
         {/* Embedded Chat Section */}
         {/* <div className="mt-10 w-full border border-gray-700 rounded-xl shadow-xl p-4 flex flex-col"> */}
         <div className="mt-10 mb-24 w-full border border-gray-700 rounded-xl shadow-xl p-4 flex flex-col">
-          <div className="overflow-y-auto max-h-[900px] pr-2">
+          {/* <div className="overflow-y-auto max-h-[900px] pr-2"> */}
+          <div
+            className="overflow-y-auto max-h-[900px] pr-2"
+            ref={chatContainerRef}
+          >
             {chatHistory.map((msg, index) => (
               <div
                 key={index}
@@ -280,7 +407,8 @@ const Index = () => {
         </div>
       </main>
 
-      <Footer />
+      {/* <Footer /> */}
+      {showFooter && <Footer />}
     </div>
   );
 };
