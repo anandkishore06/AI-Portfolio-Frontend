@@ -9,6 +9,7 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import Skills from "@/components/Skills";
 import Hero from "@/components/Hero";
+import MouseGlow from "@/components/MouseGlow";
 
 interface Message {
   sender: "user" | "ai";
@@ -216,6 +217,7 @@ const Index = () => {
       className="min-h-screen flex flex-col overflow-x-hidden text-white"
     >
       <Navbar />
+      <MouseGlow />
       {showInitialPopup && (
         <motion.div
           initial={{ opacity: 0 }}
