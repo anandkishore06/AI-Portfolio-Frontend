@@ -45,11 +45,14 @@ const Index = () => {
     setIsTyping(true);
     if (!hasInteracted) setHasInteracted(true);
     try {
-      const res = await fetch("http://localhost/8000/api/ai", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: query }),
-      });
+      const res = await fetch(
+        "https://ai-portfolio-backend-647g.onrender.com/api/ai",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: query }),
+        }
+      );
 
       const data = await res.json();
       const { section, response } = data;
