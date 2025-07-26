@@ -62,7 +62,7 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className="section-padding">
+    <section id="projects" className="section-padding overflow-x-hidden">
       <div className="container-custom">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -87,7 +87,7 @@ const Projects = () => {
             768: { slidesPerView: 2 },
             1024: { slidesPerView: 3 },
           }}
-          className="pb-10"
+          className="pb-10 overflow-hidden"
         >
           {projects.map((project, index) => (
             <SwiperSlide key={index}>
