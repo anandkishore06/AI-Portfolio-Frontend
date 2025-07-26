@@ -62,8 +62,8 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className="section-padding">
-      <div className="container-custom">
+    <section id="projects" className="section-padding overflow-hidden">
+      <div className="container-custom overflow-hidden">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             My <span className="gradient-text">Projects</span>
