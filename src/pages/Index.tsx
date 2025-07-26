@@ -155,6 +155,8 @@ const Index = () => {
       setChatHistory(errorHistory);
       localStorage.setItem("chatHistory", JSON.stringify(errorHistory));
     }
+    if (!hasInteracted) setHasInteracted(true);
+
     setIsTyping(false);
   };
 

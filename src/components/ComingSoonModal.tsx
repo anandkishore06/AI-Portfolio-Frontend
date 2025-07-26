@@ -17,7 +17,7 @@ const ComingSoonModal = ({ isOpen, onClose }) => {
             animate={{ scale: 1 }}
             exit={{ scale: 0.8 }}
           >
-            <h3 className="text-2xl font-bold text-amber-500 mb-2">
+            <h3 className="text-2xl text-zinc-700 font-bold text-amber-500 mb-2">
               🚧 Coming Soon!
             </h3>
             <p className="text-gray-600 dark:text-gray-300">
