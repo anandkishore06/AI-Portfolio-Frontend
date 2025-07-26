@@ -31,9 +31,9 @@ const FirstVisitPopup = () => {
             <div className="text-4xl mb-2">⚡</div>
             <h2 className="text-xl font-semibold mb-2">Heads Up!</h2>
             <p className="text-gray-300 text-sm mb-4">
-              The AI may take up to <strong>30 seconds</strong> to respond the
-              first time. This happens because the server is hosted on free
-              Render and might be waking up.
+              The AI is ready to chat! ⚡ Responses usually come within a few
+              seconds. If there’s a slight delay, don’t worry — it’s warming up
+              behind the scenes.
             </p>
             <button
               onClick={() => setShow(false)}

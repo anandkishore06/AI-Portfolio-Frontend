@@ -102,11 +102,6 @@ const Index = () => {
     localStorage.removeItem("chatHistory");
   };
 
-  // useEffect(() => {
-  //   if (chatHistory.length > 0) {
-  //     chatEndRef.current?.scrollIntoView({ behavior: "auto" });
-  //   }
-  // }, [chatHistory, isTyping]);
   useEffect(() => {
     const container = chatContainerRef.current;
 
@@ -163,23 +158,6 @@ const Index = () => {
     hasInitialScroll.current = true;
   }, [chatHistory.length]);
 
-  // useEffect(() => {
-  //   const container = chatContainerRef.current;
-
-  //   if (!container) return;
-
-  //   const shouldScroll =
-  //     (!isUserScrolling && hasInteracted) || !hasInitialScroll.current;
-
-  //   if (shouldScroll) {
-  //     container.scrollTo({
-  //       top: container.scrollHeight,
-  //       behavior: hasInitialScroll.current ? "smooth" : "auto",
-  //     });
-
-  //     hasInitialScroll.current = true; // mark that initial scroll has happened
-  //   }
-  // }, [chatHistory, isTyping, isUserScrolling, hasInteracted]);
   const professions = [
     "A passionate Full Stack Developer who loves building end-to-end solutions 💻",
     "A creative MERN Stack Engineer focused on scalable web applications 🚀",
@@ -428,17 +406,7 @@ const Index = () => {
                 }
               }}
             />
-            {/* <button
-              // onClick={() => handleQuery(chatInput)}
-              onClick={() => {
-                if (chatInput.trim() !== "") {
-                  handleQuery(chatInput);
-                }
-              }}
-              className="absolute top-1/2 right-2 transform -translate-y-1/2 gradient-text hover:bg-blue-700 px-4 py-1 rounded-md text-sm font-medium shadow-md border border-zinc-300"
-            >
-              Ask
-            </button> */}
+
             <button
               onClick={() => chatInput.trim() && handleQuery(chatInput)}
               className="absolute top-1/2 right-3 transform -translate-y-1/2 hover:bg-zinc-800 transition-colors duration-200 p-2 rounded-full shadow-md"
