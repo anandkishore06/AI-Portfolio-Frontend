@@ -36,6 +36,67 @@ const Index = () => {
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const hasInitialScroll = useRef(false);
 
+  // const handleQuery = async (query: string) => {
+  //   const userMessage: Message = { sender: "user", content: query };
+  //   const updatedHistory = [...chatHistory, userMessage];
+  //   setChatHistory(updatedHistory);
+  //   localStorage.setItem("chatHistory", JSON.stringify(updatedHistory));
+  //   setChatInput("");
+  //   setIsTyping(true);
+  //   if (!hasInteracted) setHasInteracted(true);
+  //   try {
+  //     const res = await fetch(
+  //       "https://ai-portfolio-backend-647g.onrender.com/api/ai",
+  //       {
+  //         method: "POST",
+  //         headers: { "Content-Type": "application/json" },
+  //         body: JSON.stringify({ message: query }),
+  //       }
+  //     );
+
+  //     const data = await res.json();
+  //     const { section, response } = data;
+
+  //     const validSections = [
+  //       "about",
+  //       "skills",
+  //       "projects",
+  //       "experience",
+  //       "contact",
+  //       "fun",
+  //       "greeting",
+  //       "personal",
+  //     ];
+
+  //     const sectionExists = validSections.includes(section);
+
+  //     const aiMessage: Message = {
+  //       sender: "ai",
+  //       content: sectionExists
+  //         ? response
+  //         : "Sorry, I didn’t understand that. Try again.",
+  //       section: sectionExists ? section : "notfound",
+  //     };
+
+  //     const newHistory = [...updatedHistory, aiMessage];
+  //     setChatHistory(newHistory);
+  //     localStorage.setItem("chatHistory", JSON.stringify(newHistory));
+  //     setSelectedSection(sectionExists ? section : "notfound");
+  //   } catch (error) {
+  //     console.error(error);
+  //     const errMessage: Message = {
+  //       sender: "ai",
+  //       content: "Something went wrong while contacting the AI.",
+  //     };
+  //     const errorHistory = [...chatHistory, userMessage, errMessage];
+  //     setChatHistory(errorHistory);
+  //     localStorage.setItem("chatHistory", JSON.stringify(errorHistory));
+  //   }
+  //   if (!hasInteracted) setHasInteracted(true);
+
+  //   setIsTyping(false);
+  // };
+
   const handleQuery = async (query: string) => {
     const userMessage: Message = { sender: "user", content: query };
     const updatedHistory = [...chatHistory, userMessage];
@@ -66,6 +127,7 @@ const Index = () => {
         "fun",
         "greeting",
         "personal",
+        "general",
       ];
 
       const sectionExists = validSections.includes(section);
@@ -82,6 +144,7 @@ const Index = () => {
       setChatHistory(newHistory);
       localStorage.setItem("chatHistory", JSON.stringify(newHistory));
       setSelectedSection(sectionExists ? section : "notfound");
+      // setBackendWarmedUp(true);
     } catch (error) {
       console.error(error);
       const errMessage: Message = {
@@ -92,8 +155,6 @@ const Index = () => {
       setChatHistory(errorHistory);
       localStorage.setItem("chatHistory", JSON.stringify(errorHistory));
     }
-    if (!hasInteracted) setHasInteracted(true);
-
     setIsTyping(false);
   };
 
