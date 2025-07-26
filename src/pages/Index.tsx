@@ -216,11 +216,10 @@ const Index = () => {
               <h2 className="text-xl font-semibold">Heads up!</h2>
             </div>
             <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
-              The AI might take up to{" "}
-              <strong className="text-white">30 seconds</strong> to respond on
-              your first message. It's hosted on{" "}
-              <span className="font-medium text-blue-400">Render</span> which
-              may put the backend to sleep when idle.
+              The AI is ready to chat! ⚡ Responses usually come within a few
+              seconds. If there’s a slight delay, don’t worry — it’s{" "}
+              <strong className="text-white">warming</strong> up behind the
+              scenes.
             </p>
 
             <button
