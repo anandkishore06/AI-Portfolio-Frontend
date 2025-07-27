@@ -4,7 +4,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-dark py-12 border-t border-gray-dark">
+    <footer className="bg-dark py-12 border-t border-gray-dark bg-white text-black dark:bg-zinc-900 dark:text-white">
       <div className="container-custom">
         <div className="flex flex-col gap-8 md:flex-row md:gap-0 justify-between items-start">
           {/* Left Column */}
@@ -12,7 +12,7 @@ const Footer = () => {
             <div className="font-bold text-2xl gradient-text mb-3">
               &#123;AK&#125; AI Portfolio.
             </div>
-            <p className="text-gray-400 max-w-full md:max-w-md">
+            <p className="max-w-full md:max-w-md  bg-white text-zinc-800 dark:bg-zinc-900 dark:text-white">
               Creating beautiful digital experiences that leave a lasting
               impression.
             </p>
@@ -26,7 +26,7 @@ const Footer = () => {
                 href="https://www.linkedin.com/in/anandkishore060/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-teal transition-colors duration-200"
+                className="hover:text-teal transition-colors duration-200  bg-white text-zinc-800 dark:bg-zinc-900 dark:text-white"
               >
                 {/* LinkedIn Icon */}
                 <svg
@@ -50,7 +50,7 @@ const Footer = () => {
                 href="https://github.com/anandkishore06"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-teal transition-colors duration-200"
+                className="hover:text-teal transition-colors duration-200  bg-white text-zinc-800 dark:bg-zinc-900 dark:text-white"
               >
                 {/* GitHub Icon */}
                 <svg
@@ -72,7 +72,7 @@ const Footer = () => {
                 href="https://x.com/anandkishore06"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-teal transition-colors duration-200"
+                className="hover:text-teal transition-colors duration-200  bg-white text-zinc-800 dark:bg-zinc-900 dark:text-white"
               >
                 {/* Twitter Icon */}
                 <svg
@@ -91,7 +91,7 @@ const Footer = () => {
               </a>
             </div>
 
-            <p className="text-gray-400">
+            <p className="bg-white text-zinc-800 dark:bg-zinc-900 dark:text-white">
               &copy; {currentYear} &#123;AK&#125; AI Portfolio. All rights
               reserved.
             </p>
@@ -102,7 +102,7 @@ const Footer = () => {
         <div className="mt-8 pt-8 border-t border-gray-dark text-center px-4 sm:px-0">
           <a
             href="#home"
-            className="text-gray-400 hover:text-teal inline-flex items-center transition-colors duration-200"
+            className="hover:text-teal inline-flex items-center transition-colors duration-200  bg-white text-zinc-800 dark:bg-zinc-900 dark:text-white"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

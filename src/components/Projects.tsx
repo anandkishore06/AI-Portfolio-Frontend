@@ -239,7 +239,7 @@ const Projects = () => {
             My <span className="gradient-text">Projects</span>
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-teal to-amber mx-auto"></div>
-          <p className="text-gray-400 mt-6 max-w-2xl mx-auto">
+          <p className="text-gray-500 mt-6 max-w-2xl mx-auto">
             Showcasing my best work across web development and design. Each
             project represents unique challenges and creative solutions.
           </p>

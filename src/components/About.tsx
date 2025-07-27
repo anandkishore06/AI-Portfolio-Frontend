@@ -77,7 +77,7 @@ const About = () => {
     <section id="about" className="section-padding bg-dark-light">
       <div className="container-custom">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white dark:text-white">
             About <span className="gradient-text">Me</span>
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-teal to-amber mx-auto"></div>
@@ -95,7 +95,7 @@ const About = () => {
 
           {/* Bio Right */}
           <div className="space-y-6">
-            <h3 className="text-2xl font-semibold mb-4">
+            <h3 className="text-2xl font-semibold mb-4 text-white">
               I'm a <span className="gradient-text">Passionate</span> Full Stack
               Developer
             </h3>
@@ -141,7 +141,7 @@ const About = () => {
 
         {/* Skills */}
         <div className="mb-20">
-          <h3 className="text-2xl font-semibold text-center mb-12">
+          <h3 className="text-2xl font-semibold text-center mb-12 text-white">
             My <span className="gradient-text">Skills</span>
           </h3>
 
@@ -208,14 +208,14 @@ const About = () => {
 
         {/* Services */}
         <div className="mt-20">
-          <h3 className="text-2xl font-semibold text-center mb-12">
+          <h3 className="text-2xl font-semibold text-center mb-12 text-white">
             Services I <span className="gradient-text">Offer</span>
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
               <div
                 key={index}
-                className="glass-card p-6 transition-all duration-300 hover:translate-y-[-5px] hover:shadow-lg"
+                className="glass-card p-6 transition-all duration-300 hover:translate-y-[-5px] hover:shadow-lg text-white"
               >
                 <div className="mb-5 w-14 h-14 flex items-center justify-center rounded-full bg-dark-light">
                   {service.icon}

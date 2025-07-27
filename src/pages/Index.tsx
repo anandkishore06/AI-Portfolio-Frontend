@@ -255,7 +255,7 @@ const Index = () => {
   return (
     <div
       id="Home"
-      className="min-h-screen flex flex-col overflow-x-hidden text-white"
+      className="min-h-screen flex flex-col overflow-x-hidden text-white bg-white text-black dark:bg-zinc-900 dark:text-white"
     >
       <Navbar />
       <MouseGlow />
@@ -302,7 +302,7 @@ const Index = () => {
         <div className="mt-32 md:mt-40 flex flex-col items-center justify-center gap-6 px-4 md:px-0">
           {/* <Hero /> */}
           <motion.h1
-            className="text-xl sm:text-xl md:text-3xl font-semibold text-white"
+            className="text-xl sm:text-xl md:text-3xl font-semibold bg-white text-zinc-700 dark:bg-zinc-900 dark:text-white"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
@@ -342,7 +342,7 @@ const Index = () => {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="relative bg-zinc-800 border border-gray-600 text-white px-5 py-3 rounded-2xl shadow-md max-w-fit text-sm sm:text-base md:text-lg mt-4"
+            className="relative border border-gray-600 px-5 py-3 rounded-2xl shadow-md max-w-fit text-sm sm:text-base md:text-lg mt-4 bg-white text-zinc-800 dark:bg-zinc-900 dark:text-white"
           >
             Ask me anything about my{" "}
             <span className="text-blue-400 font-semibold">projects</span>,{" "}
@@ -356,7 +356,7 @@ const Index = () => {
 
         {/* Embedded Chat Section */}
         {/* <div className="mt-10 w-full border border-gray-700 rounded-xl shadow-xl p-4 flex flex-col"> */}
-        <div className="mt-10 mb-24 w-full border border-gray-700 rounded-xl shadow-xl p-4 flex flex-col">
+        <div className="mt-10 mb-24 w-full  border-gray-700 rounded-xl  p-4 flex flex-col">
           {/* <div className="overflow-y-auto max-h-[900px] pr-2"> */}
           <div
             className="overflow-y-auto max-h-[900px] pr-2"
@@ -381,7 +381,7 @@ const Index = () => {
                   className={`p-2 rounded-lg text-sm text-left max-w-6xl ${
                     msg.sender === "user"
                       ? "bg-blue-600 text-white max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl rounded-br-none"
-                      : "text-gray-100 rounded-bl-none w-full max-w-6xl text-left"
+                      : " rounded-bl-none w-full max-w-6xl text-left bg-white text-zinc-800 dark:bg-zinc-900 dark:text-white"
                   }`}
                 >
                   {/* Only render plain text if it's NOT one of the component sections */}
@@ -449,7 +449,9 @@ const Index = () => {
                   alt="AI Avatar"
                   className="w-6 h-6 rounded-full"
                 />
-                <span className="animate-pulse">AI is typing...</span>
+                <span className="animate-pulse bg-white text-black dark:bg-zinc-900 dark:text-white">
+                  AI is typing...
+                </span>
               </div>
             )}
             <div ref={chatEndRef} />
@@ -457,7 +459,7 @@ const Index = () => {
 
           <div className="relative mt-4 w-full max-w-xl mx-auto">
             <input
-              className="border border-gray-600 rounded-2xl px-4 py-2 w-full text-white bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-gray-800 pr-28 shadow-lg"
+              className="border border-gray-600 rounded-2xl px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-gray-800 pr-28 shadow-lg bg-white text-black dark:bg-zinc-900 dark:text-white"
               placeholder="Ask me anything..."
               value={chatInput}
               onChange={(e) => setChatInput(e.target.value)}
@@ -471,9 +473,9 @@ const Index = () => {
 
             <button
               onClick={() => chatInput.trim() && handleQuery(chatInput)}
-              className="absolute top-1/2 right-3 transform -translate-y-1/2 hover:bg-zinc-800 transition-colors duration-200 p-2 rounded-full shadow-md"
+              className="absolute top-1/2 right-3 transform -translate-y-1/2 hover:backdrop-brightness-90 transition-colors duration-200 p-2 rounded-full shadow-md"
             >
-              <SendHorizontal className="w-5 h-5 text-white" />
+              <SendHorizontal className="w-5 h-5 text-black dark:text-white" />
             </button>
           </div>
 
@@ -490,7 +492,7 @@ const Index = () => {
               <button
                 key={btn.value}
                 onClick={() => handleQuery(btn.label)}
-                className="bg-zinc-800 hover:bg-gray-700 text-white px-4 py-1 rounded-full text-sm border border-gray-600"
+                className="hover:bg-gray-200 px-4 py-1 rounded-full text-sm border border-gray-600 bg-white text-zinc-800 dark:bg-zinc-900 dark:text-white"
               >
                 {btn.label}
               </button>

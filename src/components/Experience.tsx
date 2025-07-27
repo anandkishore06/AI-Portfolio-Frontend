@@ -146,7 +146,7 @@ const Experience = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
             Work <span className="gradient-text">Experience</span>
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-teal to-amber mx-auto"></div>
@@ -156,7 +156,7 @@ const Experience = () => {
           </p>
         </motion.div>
 
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-3xl mx-auto text-white">
           {experiences.map((exp, index) => (
             <ExperienceItem
               key={index}
@@ -182,10 +182,10 @@ const Experience = () => {
               asChild
             >
               <a
-                href="Resume_Anand.pdf"
+                href="Resume_Anand_updated.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                download="My_Resume.pdf"
+                download="My_Resume_updated.pdf"
               >
                 Download Full Resume
               </a>
