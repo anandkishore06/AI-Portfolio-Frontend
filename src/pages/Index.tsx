@@ -17,6 +17,23 @@ interface Message {
   section?: string;
 }
 
+const VALID_SECTIONS = [
+  "about",
+  "skills",
+  "projects",
+  "experience",
+  "contact",
+  "fun",
+  "greeting",
+  "personal",
+  "general",
+] as const;
+
+const normalizeSection = (value: unknown): string => {
+  if (typeof value !== "string") return "";
+  return value.trim().toLowerCase();
+};
+
 const Index = () => {
   const [selectedSection, setSelectedSection] = useState<string | null>(null);
   const [chatInput, setChatInput] = useState("");
@@ -36,126 +53,60 @@ const Index = () => {
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const hasInitialScroll = useRef(false);
 
-  // const handleQuery = async (query: string) => {
-  //   const userMessage: Message = { sender: "user", content: query };
-  //   const updatedHistory = [...chatHistory, userMessage];
-  //   setChatHistory(updatedHistory);
-  //   localStorage.setItem("chatHistory", JSON.stringify(updatedHistory));
-  //   setChatInput("");
-  //   setIsTyping(true);
-  //   if (!hasInteracted) setHasInteracted(true);
-  //   try {
-  //     const res = await fetch(
-  //       "https://ai-portfolio-backend-647g.onrender.com/api/ai",
-  //       {
-  //         method: "POST",
-  //         headers: { "Content-Type": "application/json" },
-  //         body: JSON.stringify({ message: query }),
-  //       }
-  //     );
-
-  //     const data = await res.json();
-  //     const { section, response } = data;
-
-  //     const validSections = [
-  //       "about",
-  //       "skills",
-  //       "projects",
-  //       "experience",
-  //       "contact",
-  //       "fun",
-  //       "greeting",
-  //       "personal",
-  //     ];
-
-  //     const sectionExists = validSections.includes(section);
-
-  //     const aiMessage: Message = {
-  //       sender: "ai",
-  //       content: sectionExists
-  //         ? response
-  //         : "Sorry, I didn’t understand that. Try again.",
-  //       section: sectionExists ? section : "notfound",
-  //     };
-
-  //     const newHistory = [...updatedHistory, aiMessage];
-  //     setChatHistory(newHistory);
-  //     localStorage.setItem("chatHistory", JSON.stringify(newHistory));
-  //     setSelectedSection(sectionExists ? section : "notfound");
-  //   } catch (error) {
-  //     console.error(error);
-  //     const errMessage: Message = {
-  //       sender: "ai",
-  //       content: "Something went wrong while contacting the AI.",
-  //     };
-  //     const errorHistory = [...chatHistory, userMessage, errMessage];
-  //     setChatHistory(errorHistory);
-  //     localStorage.setItem("chatHistory", JSON.stringify(errorHistory));
-  //   }
-  //   if (!hasInteracted) setHasInteracted(true);
-
-  //   setIsTyping(false);
-  // };
-
   const handleQuery = async (query: string) => {
-    const userMessage: Message = { sender: "user", content: query };
+    const trimmedQuery = query.trim();
+    if (!trimmedQuery) return;
+
+    const userMessage: Message = { sender: "user", content: trimmedQuery };
     const updatedHistory = [...chatHistory, userMessage];
     setChatHistory(updatedHistory);
     localStorage.setItem("chatHistory", JSON.stringify(updatedHistory));
     setChatInput("");
     setIsTyping(true);
     if (!hasInteracted) setHasInteracted(true);
+
     try {
       const res = await fetch(
         "https://ai-portfolio-backend-647g.onrender.com/api/ai",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: query }),
+          body: JSON.stringify({ message: trimmedQuery }),
         }
       );
 
-      const data = await res.json();
-      const { section, response } = data;
+      const data = await res.json().catch(() => ({}));
+      const backendSection = normalizeSection(data?.section);
+      const backendResponse = typeof data?.response === "string" ? data.response.trim() : "";
 
-      const validSections = [
-        "about",
-        "skills",
-        "projects",
-        "experience",
-        "contact",
-        "fun",
-        "greeting",
-        "personal",
-        "general",
-      ];
-
-      const sectionExists = validSections.includes(section);
+      const knownSection =
+        backendSection && VALID_SECTIONS.includes(backendSection as (typeof VALID_SECTIONS)[number])
+          ? backendSection
+          : "general";
 
       const aiMessage: Message = {
         sender: "ai",
-        content: sectionExists
-          ? response
-          : "Sorry, I didn’t understand that. Try again.",
-        section: sectionExists ? section : "notfound",
+        content:
+          backendResponse ||
+          "I can help with my projects, skills, experience, and contact details. Ask me about my portfolio!",
+        section: knownSection,
       };
 
       const newHistory = [...updatedHistory, aiMessage];
       setChatHistory(newHistory);
       localStorage.setItem("chatHistory", JSON.stringify(newHistory));
-      setSelectedSection(sectionExists ? section : "notfound");
-      // setBackendWarmedUp(true);
+      setSelectedSection(knownSection);
     } catch (error) {
-      console.error(error);
+      console.error("AI request failed:", error);
       const errMessage: Message = {
         sender: "ai",
-        content: "Something went wrong while contacting the AI.",
+        content: "Something went wrong while contacting the AI. Please try again.",
+        section: "general",
       };
-      const errorHistory = [...chatHistory, userMessage, errMessage];
+      const errorHistory = [...updatedHistory, errMessage];
       setChatHistory(errorHistory);
       localStorage.setItem("chatHistory", JSON.stringify(errorHistory));
     }
-    if (!hasInteracted) setHasInteracted(true);
 
     setIsTyping(false);
   };
@@ -189,13 +140,9 @@ const Index = () => {
       const chatRect = chatContainer.getBoundingClientRect();
       const windowHeight = window.innerHeight;
 
-      // Check if chat is fully visible or overflowing
       const chatIsFullyVisible = chatRect.bottom <= windowHeight;
       const userScrolledBelowChat = chatRect.bottom < windowHeight - 50;
 
-      // Show footer only if:
-      // - user hasn’t interacted (initial visit), or
-      // - user has scrolled below the chat
       if (!hasInteracted || userScrolledBelowChat) {
         setShowFooter(true);
       } else {
@@ -204,7 +151,7 @@ const Index = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // run on mount too
+    handleScroll();
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, [hasInteracted]);
@@ -236,7 +183,6 @@ const Index = () => {
     "A Developer who bridges design and code to deliver engaging user journeys 🌐",
   ];
 
-  // const [currentProfession, setCurrentProfession] = useState("");
   const indexRef = useRef(0);
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -247,7 +193,7 @@ const Index = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % professions.length);
-    }, 3000); // rotate every 3 seconds
+    }, 3000);
 
     return () => clearInterval(interval);
   }, []);
@@ -300,7 +246,6 @@ const Index = () => {
 
       <main className="flex-grow px-4 text-center" id="home">
         <div className="mt-32 md:mt-40 flex flex-col items-center justify-center gap-6 px-4 md:px-0">
-          {/* <Hero /> */}
           <motion.h1
             className="text-xl sm:text-xl md:text-3xl font-semibold bg-white text-zinc-700 dark:bg-zinc-900 dark:text-white"
             initial={{ opacity: 0, y: -10 }}
@@ -323,21 +268,12 @@ const Index = () => {
           <motion.img
             src="img1.png"
             alt="avatar"
-            // className="w-28 h-28 sm:w-36 sm:h-36 md:w-48 md:h-48 rounded-full object-cover"
             className="w-44 h-44 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-full"
             initial={{ scale: 0.7, rotate: -10, opacity: 0 }}
             animate={{ scale: 1, rotate: 0, opacity: 1 }}
             transition={{ duration: 0.9, ease: "easeOut" }}
           />
 
-          {/* <motion.h2
-            className="text-sm sm:text-lg md:text-2xl font-semibold text-gray-300"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-          >
-            Ask me anything about my portfolio
-          </motion.h2> */}
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -354,10 +290,7 @@ const Index = () => {
           </motion.div>
         </div>
 
-        {/* Embedded Chat Section */}
-        {/* <div className="mt-10 w-full border border-gray-700 rounded-xl shadow-xl p-4 flex flex-col"> */}
         <div className="mt-10 mb-24 w-full  border-gray-700 rounded-xl  p-4 flex flex-col">
-          {/* <div className="overflow-y-auto max-h-[900px] pr-2"> */}
           <div
             className="overflow-y-auto max-h-[900px] pr-2"
             ref={chatContainerRef}
@@ -384,7 +317,6 @@ const Index = () => {
                       : " rounded-bl-none w-full max-w-6xl text-left bg-white text-zinc-800 dark:bg-zinc-900 dark:text-white"
                   }`}
                 >
-                  {/* Only render plain text if it's NOT one of the component sections */}
                   {[
                     "projects",
                     "about",
@@ -427,9 +359,7 @@ const Index = () => {
                     </div>
                   )}
                   {msg.section === "personal" && (
-                    // <div className="mt-4 w-full">
                     <p>{msg.content}</p>
-                    // </div>
                   )}
                 </div>
 
@@ -463,7 +393,6 @@ const Index = () => {
               placeholder="Ask me anything..."
               value={chatInput}
               onChange={(e) => setChatInput(e.target.value)}
-              // onKeyDown={(e) => e.key === "Enter" && handleQuery(chatInput)}
               onKeyDown={(e) => {
                 if (e.key === "Enter" && chatInput.trim() !== "") {
                   handleQuery(chatInput);
@@ -479,7 +408,6 @@ const Index = () => {
             </button>
           </div>
 
-          {/* Quick Buttons */}
           <div className="mt-6 flex flex-wrap justify-center gap-2">
             {[
               { label: "👤 About", value: "about" },
@@ -491,7 +419,7 @@ const Index = () => {
             ].map((btn) => (
               <button
                 key={btn.value}
-                onClick={() => handleQuery(btn.label)}
+                onClick={() => handleQuery(btn.value)}
                 className="hover:bg-gray-200 px-4 py-1 rounded-full text-sm border border-gray-600 bg-white text-zinc-800 dark:bg-zinc-900 dark:text-white"
               >
                 {btn.label}
@@ -507,7 +435,6 @@ const Index = () => {
         </div>
       </main>
 
-      {/* <Footer /> */}
       {showFooter && <Footer />}
     </div>
   );
