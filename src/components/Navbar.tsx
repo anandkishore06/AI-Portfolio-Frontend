@@ -1,240 +1,8 @@
-// import React, { useState, useEffect } from "react";
-// import { cn } from "@/lib/utils";
-
-// const Navbar = () => {
-//   const [scrolled, setScrolled] = useState(false);
-//   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-//   useEffect(() => {
-//     const handleScroll = () => {
-//       const isScrolled = window.scrollY > 20;
-//       if (isScrolled !== scrolled) {
-//         setScrolled(isScrolled);
-//       }
-//     };
-
-//     window.addEventListener("scroll", handleScroll);
-//     return () => {
-//       window.removeEventListener("scroll", handleScroll);
-//     };
-//   }, [scrolled]);
-
-//   const navLinks = [
-//     { name: "Home", href: "#home" },
-//     { name: "About", href: "#about" },
-//     { name: "Experience", href: "#experience" },
-//     { name: "Projects", href: "#projects" },
-//     { name: "Contact", href: "#contact" },
-//   ];
-
-//   return (
-//     <header
-//       className={cn(
-//         "fixed w-full top-0 z-50 transition-all duration-300 px-4 md:px-8",
-//         scrolled
-//           ? "bg-dark-light/95 backdrop-blur-sm shadow-md py-3"
-//           : "bg-transparent py-5"
-//       )}
-//     >
-//       <div className="container-custom flex items-center justify-between">
-//         <a href="#home" className="flex items-center">
-//           <span className="font-bold text-xl md:text-2xl gradient-text">
-//             &#123;AK&#125; AI Portfolio.
-//           </span>
-//         </a>
-
-//         {/* Desktop Navigation */}
-//         {/* <nav className="hidden md:flex items-center space-x-10">
-//           {navLinks.map((link) => (
-//             <a
-//               key={link.name}
-//               href={link.href}
-//               className="text-gray-300 hover:text-teal transition-colors duration-200"
-//             >
-//               {link.name}
-//             </a>
-//           ))}
-//         </nav> */}
-
-//         {/* Mobile Menu Button */}
-//         {/* <button
-//           className="md:hidden p-2"
-//           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-//           aria-label="Toggle menu"
-//         >
-//           <div className="space-y-2">
-//             <span className={cn(
-//               "block w-6 h-0.5 bg-white transition-all duration-300",
-//               mobileMenuOpen && "translate-y-1.5 rotate-45"
-//             )}></span>
-//             <span className={cn(
-//               "block w-6 h-0.5 bg-white transition-all duration-300",
-//               mobileMenuOpen && "opacity-0"
-//             )}></span>
-//             <span className={cn(
-//               "block w-6 h-0.5 bg-white transition-all duration-300",
-//               mobileMenuOpen && "-translate-y-1.5 -rotate-45"
-//             )}></span>
-//           </div>
-//         </button> */}
-//       </div>
-
-//       {/* Mobile Navigation */}
-//       {/* <div className={cn(
-//         "fixed inset-x-0 top-[60px] bg-dark-light/95 backdrop-blur-sm transition-all duration-300 md:hidden",
-//         mobileMenuOpen ? "opacity-100 h-auto py-4" : "opacity-0 h-0 py-0 overflow-hidden"
-//       )}>
-//         <nav className="container-custom flex flex-col space-y-4">
-//           {navLinks.map((link) => (
-//             <a
-//               key={link.name}
-//               href={link.href}
-//               className="text-gray-300 hover:text-teal py-2 px-4 transition-colors duration-200"
-//               onClick={() => setMobileMenuOpen(false)}
-//             >
-//               {link.name}
-//             </a>
-//           ))}
-//         </nav>
-//       </div> */}
-//     </header>
-//   );
-// };
-
-// export default Navbar;
-
-// import React, { useState, useEffect } from "react";
-// import { cn } from "@/lib/utils";
-// import { useTheme } from "../theme/ThemeContext";
-
-// const Navbar = () => {
-//   const [scrolled, setScrolled] = useState(false);
-//   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-//   const { theme, toggleTheme } = useTheme();
-
-//   useEffect(() => {
-//     const handleScroll = () => {
-//       const isScrolled = window.scrollY > 20;
-//       if (isScrolled !== scrolled) {
-//         setScrolled(isScrolled);
-//       }
-//     };
-
-//     window.addEventListener("scroll", handleScroll);
-//     return () => {
-//       window.removeEventListener("scroll", handleScroll);
-//     };
-//   }, [scrolled]);
-
-//   return (
-//     <header
-//       className={cn(
-//         "fixed w-full top-0 z-50 transition-all duration-300 px-4 md:px-8",
-//         scrolled
-//           ? "bg-dark-light/95 backdrop-blur-sm shadow-md py-3"
-//           : "bg-transparent py-5"
-//       )}
-//     >
-//       <div className="container-custom flex items-center justify-between">
-//         <a href="#home" className="flex items-center">
-//           <span className="font-bold text-xl md:text-2xl gradient-text">
-//             &#123;AK&#125; AI Portfolio.
-//           </span>
-//         </a>
-
-//         {/* Desktop Resume Button */}
-//         <div className="hidden md:flex items-center">
-//           <a
-//             href="Resume_Anand.pdf"
-//             download
-//             className="ml-4 bg-zinc-800 border border-zinc-400 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-800 transition flex items-center gap-2"
-//           >
-// <svg
-//   xmlns="http://www.w3.org/2000/svg"
-//   width="16"
-//   height="16"
-//   fill="currentColor"
-//   className="bi bi-download"
-//   viewBox="0 0 16 16"
-// >
-//   <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.6a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5V10.4a.5.5 0 0 1 1 0v2.6A1.5 1.5 0 0 1 14 14.5H2A1.5 1.5 0 0 1 .5 13V10.4a.5.5 0 0 1 .5-.5z" />
-//   <path d="M5.354 6.646a.5.5 0 0 1 .707 0L8 8.586V1.5a.5.5 0 0 1 1 0v7.086l1.939-1.94a.5.5 0 1 1 .707.708l-2.646 2.647a.5.5 0 0 1-.707 0L5.354 7.354a.5.5 0 0 1 0-.708z" />
-// </svg>
-//             Resume
-//           </a>
-//         </div>
-
-//         {/* Mobile Menu Toggle Button */}
-{
-  /* <button
-  className="md:hidden p-2"
-  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-  aria-label="Toggle menu"
->
-  <div className="space-y-2">
-    <span
-      className={cn(
-        "block w-6 h-0.5 bg-white transition-all duration-300",
-        mobileMenuOpen && "translate-y-1.5 rotate-45"
-      )}
-    />
-    <span
-      className={cn(
-        "block w-6 h-0.5 bg-white transition-all duration-300",
-        mobileMenuOpen && "opacity-0"
-      )}
-    />
-    <span
-      className={cn(
-        "block w-6 h-0.5 bg-white transition-all duration-300",
-        mobileMenuOpen && "-translate-y-1.5 -rotate-45"
-      )}
-    />
-  </div>
-</button> */
-}
-//       </div>
-
-//       {/* Mobile Resume Button */}
-//       <div
-//         className={cn(
-//           "fixed inset-x-0 top-[60px] backdrop-blur-sm transition-all duration-300 md:hidden z-40",
-//           mobileMenuOpen
-//             ? "opacity-100 h-auto py-4"
-//             : "opacity-0 h-0 py-0 overflow-hidden"
-//         )}
-//       >
-//         <div className="container-custom">
-//           <a
-//             href="Resume_Anand.pdf"
-// download
-// className="mx-4 mt-2 text-center bg-zinc-800 border border-zinc-400 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-800 transition flex items-center justify-center gap-2"
-// >
-// <svg
-//   xmlns="http://www.w3.org/2000/svg"
-//   width="16"
-//   height="16"
-//   fill="currentColor"
-//   className="bi bi-download"
-//   viewBox="0 0 16 16"
-// >
-//   <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.6a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5V10.4a.5.5 0 0 1 1 0v2.6A1.5 1.5 0 0 1 14 14.5H2A1.5 1.5 0 0 1 .5 13V10.4a.5.5 0 0 1 .5-.5z" />
-//   <path d="M5.354 6.646a.5.5 0 0 1 .707 0L8 8.586V1.5a.5.5 0 0 1 1 0v7.086l1.939-1.94a.5.5 0 1 1 .707.708l-2.646 2.647a.5.5 0 0 1-.707 0L5.354 7.354a.5.5 0 0 1 0-.708z" />
-// </svg>
-// Resume
-//           </a>
-//         </div>
-//       </div>
-//     </header>
-//   );
-// };
-
-// export default Navbar;
-
 import React, { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { useTheme } from "../theme/ThemeContext";
-import { MoonIcon, StarIcon, SunIcon } from "lucide-react";
+import { MoonIcon, SunIcon, Download } from "lucide-react";
+import AIIcon from "./AIIcon";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -250,133 +18,139 @@ const Navbar = () => {
   }, []);
 
   return (
-    <header
-      className={cn(
-        "fixed w-full top-0 z-50 transition-all duration-300 px-4 md:px-8",
-        scrolled
-          ? "bg-dark-light/95 backdrop-blur-sm shadow-md py-3  bg-white text-zinc-800 dark:bg-zinc-900 dark:text-white"
-          : "bg-transparent py-5"
-      )}
-    >
-      <div className="container-custom flex items-center justify-between relative">
-        {/* Logo */}
-        <a href="#home" className="font-bold text-xl md:text-2xl gradient-text">
-          &#123;AK&#125; AI Portfolio.
+    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-4 sm:px-6 md:px-8 pt-3 sm:pt-4">
+      {/* Subtle top fade mask so content fading behind floating pill never harshly peeks through top gap */}
+      <div className="fixed top-0 left-0 right-0 h-16 bg-gradient-to-b from-zinc-50/90 via-zinc-50/60 to-transparent dark:from-zinc-950/95 dark:via-zinc-950/60 dark:to-transparent pointer-events-none -z-10" />
+
+      <div
+        className={cn(
+          "max-w-6xl mx-auto flex items-center justify-between transition-all duration-300 rounded-2xl relative",
+          scrolled
+            ? "py-2.5 px-4 sm:px-6 bg-white/85 dark:bg-zinc-900/85 backdrop-blur-xl shadow-md shadow-zinc-950/5 dark:shadow-black/30 border border-zinc-200/70 dark:border-zinc-800/80"
+            : "py-3 px-3 sm:px-5 bg-white/40 dark:bg-zinc-900/40 backdrop-blur-md border border-zinc-200/40 dark:border-zinc-800/40 shadow-xs"
+        )}
+      >
+        {/* Brand / Logo */}
+        <a
+          href="#home"
+          className="group flex items-center gap-2.5 transition-transform duration-200 hover:scale-102"
+        >
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-teal to-amber flex items-center justify-center text-zinc-950 font-bold text-sm shadow-sm group-hover:shadow-teal/20 group-hover:shadow-md transition-all">
+            AK
+          </div>
+          <div className="flex flex-col text-left">
+            <span className="font-semibold text-sm sm:text-base tracking-tight text-zinc-900 dark:text-zinc-100 group-hover:text-teal transition-colors">
+              Anand Kishore
+            </span>
+            <span className="text-[10px] text-zinc-500 dark:text-zinc-400 font-medium -mt-0.5 flex items-center gap-1">
+              <AIIcon className="w-2.5 h-2.5 text-amber" /> AI Portfolio
+            </span>
+          </div>
         </a>
 
-        {/* Desktop Menu */}
+        {/* Center: Status Indicator (Desktop) - perfectly centered */}
+        <div className="hidden md:inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 backdrop-blur-sm md:absolute md:left-1/2 md:-translate-x-1/2">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+          </span>
+          <span>Available for opportunities</span>
+        </div>
 
-        {/* Right buttons (Resume + Theme toggle) */}
-        <div className="hidden md:flex items-center gap-4">
+        {/* Right Actions: Theme Toggle + Resume */}
+        <div className="hidden sm:flex items-center gap-3">
           <button
             onClick={toggleTheme}
-            className="text-white text-xl transition rounded-xl"
+            className="p-2 rounded-xl text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors border border-transparent hover:border-zinc-200 dark:hover:border-zinc-700/60"
             aria-label="Toggle theme"
           >
             {theme === "dark" ? (
-              <SunIcon className="text-yellow-400" />
+              <SunIcon className="w-4.5 h-4.5 text-amber transition-transform duration-300 rotate-0 hover:rotate-45" />
             ) : (
-              <MoonIcon className="w-5 h-5 text-zinc-600" />
+              <MoonIcon className="w-4.5 h-4.5 text-zinc-600 transition-transform duration-300 hover:-rotate-12" />
             )}
           </button>
 
           <a
-            href="Resume_Anand_updated.pdf"
+            href="Anand's_Resume.pdf"
             download
-            className="mx-4 mt-2 text-center border border-zinc-400 px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-200 transition flex items-center justify-center gap-2  bg-white text-zinc-800 dark:bg-zinc-800 dark:text-white"
+            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium text-zinc-900 dark:text-zinc-100 bg-zinc-100 hover:bg-zinc-200/80 dark:bg-zinc-800/80 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-700/80 transition-all duration-200 shadow-xs hover:shadow-sm active:scale-97"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              className="bi bi-download"
-              viewBox="0 0 16 16"
-            >
-              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.6a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5V10.4a.5.5 0 0 1 1 0v2.6A1.5 1.5 0 0 1 14 14.5H2A1.5 1.5 0 0 1 .5 13V10.4a.5.5 0 0 1 .5-.5z" />
-              <path d="M5.354 6.646a.5.5 0 0 1 .707 0L8 8.586V1.5a.5.5 0 0 1 1 0v7.086l1.939-1.94a.5.5 0 1 1 .707.708l-2.646 2.647a.5.5 0 0 1-.707 0L5.354 7.354a.5.5 0 0 1 0-.708z" />
-            </svg>
-            Resume
+            <Download className="w-4 h-4 text-teal" />
+            <span>Resume</span>
           </a>
         </div>
 
-        {/* Mobile toggle (hamburger) */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden z-[100] ml-auto"
-          aria-label="Toggle menu"
-        >
-          <div className="space-y-1">
-            <div className="space-y-1">
+        {/* Mobile controls */}
+        <div className="flex sm:hidden items-center gap-2">
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-xl text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+            aria-label="Toggle theme mobile"
+          >
+            {theme === "dark" ? (
+              <SunIcon className="w-4 h-4 text-amber" />
+            ) : (
+              <MoonIcon className="w-4 h-4 text-zinc-600" />
+            )}
+          </button>
+
+          <a
+            href="Anand's_Resume.pdf"
+            download
+            className="p-2 rounded-xl text-zinc-700 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700/80"
+            aria-label="Download resume"
+          >
+            <Download className="w-4 h-4 text-teal" />
+          </a>
+
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="p-2 rounded-xl text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800"
+            aria-label="Toggle menu"
+          >
+            <div className="w-5 h-4 flex flex-col justify-between">
               <span
                 className={cn(
-                  "block w-6 h-0.5 transition-all",
-                  "bg-zinc-800 dark:bg-white",
-                  mobileMenuOpen && "translate-y-1.5 rotate-45"
+                  "block h-0.5 w-full bg-current transform transition duration-300 ease-in-out",
+                  mobileMenuOpen && "rotate-45 translate-y-1.5"
                 )}
               />
               <span
                 className={cn(
-                  "block w-6 h-0.5 transition-all",
-                  "bg-zinc-700 dark:bg-white",
+                  "block h-0.5 w-full bg-current transition-opacity duration-300 ease-in-out",
                   mobileMenuOpen && "opacity-0"
                 )}
               />
               <span
                 className={cn(
-                  "block w-6 h-0.5 transition-all",
-                  "bg-zinc-800 dark:bg-white",
-                  mobileMenuOpen && "-translate-y-1.5 -rotate-45"
+                  "block h-0.5 w-full bg-current transform transition duration-300 ease-in-out",
+                  mobileMenuOpen && "-rotate-45 -translate-y-1.5"
                 )}
               />
             </div>
-          </div>
-        </button>
-
-        {/* Always visible theme toggle for mobile */}
-        <button
-          onClick={toggleTheme}
-          className="md:hidden absolute right-14 top-1/2 -translate-y-1/2 text-white text-xl transition z-[90]"
-          aria-label="Toggle theme mobile"
-        >
-          {theme === "dark" ? (
-            <SunIcon className="text-yellow-400" />
-          ) : (
-            <MoonIcon className="w-5 h-5 text-zinc-600" />
-          )}
-        </button>
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu Dropdown */}
-      <div
-        className={cn(
-          "md:hidden transition-all duration-300 overflow-hidden bg-dark-light absolute w-full left-0 top-full z-40 bg-white text-black dark:bg-zinc-900 dark:text-white",
-          mobileMenuOpen
-            ? "max-h-[200px] py-4 opacity-100"
-            : "max-h-0 py-0 opacity-0"
-        )}
-      >
-        <div className="px-4 space-y-3 bg-white text-black dark:bg-zinc-900 dark:text-white">
+      {mobileMenuOpen && (
+        <div className="sm:hidden mt-2 max-w-6xl mx-auto p-4 rounded-2xl bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl border border-zinc-200 dark:border-zinc-800 shadow-xl space-y-3 animate-in fade-in slide-in-from-top-2 duration-200">
+          <div className="flex items-center gap-2 px-2 py-1 text-xs text-emerald-600 dark:text-emerald-400 font-medium">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            Available for opportunities
+          </div>
           <a
-            href="Resume_Anand_updated.pdf"
+            href="Anand's_Resume.pdf"
             download
-            className="mx-4 mt-2 text-center border border-zinc-400 px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-800 transition flex items-center justify-center gap-2  bg-white text-black dark:bg-zinc-900 dark:text-white"
+            onClick={() => setMobileMenuOpen(false)}
+            className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-sm font-medium text-zinc-900 dark:text-zinc-100 bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              className="bi bi-download"
-              viewBox="0 0 16 16"
-            >
-              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.6a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5V10.4a.5.5 0 0 1 1 0v2.6A1.5 1.5 0 0 1 14 14.5H2A1.5 1.5 0 0 1 .5 13V10.4a.5.5 0 0 1 .5-.5z" />
-              <path d="M5.354 6.646a.5.5 0 0 1 .707 0L8 8.586V1.5a.5.5 0 0 1 1 0v7.086l1.939-1.94a.5.5 0 1 1 .707.708l-2.646 2.647a.5.5 0 0 1-.707 0L5.354 7.354a.5.5 0 0 1 0-.708z" />
-            </svg>
-            Resume
+            <Download className="w-4 h-4 text-teal" />
+            Download Resume
           </a>
         </div>
-      </div>
+      )}
     </header>
   );
 };

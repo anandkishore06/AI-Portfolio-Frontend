@@ -1,230 +1,118 @@
 import React from "react";
-import { cn } from "@/lib/utils";
+import { CheckCircle2, Code2, Bot, Database, GraduationCap } from "lucide-react";
 
 const About = () => {
   const services = [
     {
-      title: "Web Design",
+      title: "AI & Document Intelligence",
       description:
-        "Creating beautiful, responsive websites with a focus on user experience.",
-      icon: (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="text-teal"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-          <line x1="8" y1="21" x2="16" y2="21"></line>
-          <line x1="12" y1="17" x2="12" y2="21"></line>
-        </svg>
-      ),
+        "Building RAG-based chatbots, document intelligence pipelines, embeddings, and agentic workflows using OpenAI, LangChain, pgvector, and MCP.",
+      icon: <Bot className="w-6 h-6 text-teal" />,
     },
     {
-      title: "App Development",
+      title: "Enterprise Backend & APIs",
       description:
-        "Building cross-platform mobile applications with React Native.",
-      icon: (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="text-teal"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
-          <path d="M12 18h.01"></path>
-        </svg>
-      ),
+        "Architecting high-throughput RESTful microservices with Spring Boot, Java, Node.js, Hibernate ORM, and Oracle / PostgreSQL databases.",
+      icon: <Database className="w-6 h-6 text-amber" />,
     },
     {
-      title: "UI/UX Design",
+      title: "Full-Stack Web Engineering",
       description:
-        "Designing intuitive interfaces and seamless user experiences.",
-      icon: (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="text-teal"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
-          <line x1="8" y1="2" x2="8" y2="18"></line>
-          <line x1="16" y1="6" x2="16" y2="22"></line>
-        </svg>
-      ),
+        "Crafting responsive, high-performance web applications and cloud architectures with React.js, TypeScript, Redux, Tailwind CSS, and AWS.",
+      icon: <Code2 className="w-6 h-6 text-teal" />,
     },
   ];
 
-  return (
-    <section id="about" className="section-padding bg-dark-light">
-      <div className="container-custom">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white dark:text-white">
-            About <span className="gradient-text">Me</span>
-          </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-teal to-amber mx-auto"></div>
-        </div>
+  const highlights = [
+    "AI & RAG Document Pipelines (LangChain, pgvector)",
+    "Enterprise Spring Boot & Java REST APIs",
+    "Production Full-Stack React.js & TypeScript Apps",
+    "AWS Cloud, Docker & CI/CD Automated Pipelines",
+    "Database Engineering (PostgreSQL, Oracle, MongoDB)",
+    "B.Tech CSE from Haldia Institute of Tech (9.23 CGPA)",
+  ];
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
-          {/* Profile Image Left */}
-          <div className="flex justify-center lg:justify-start">
+  return (
+    <section id="about" className="py-8 sm:py-12">
+      {/* Section Header */}
+      <div className="text-center mb-12">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 mb-3">
+          About <span className="gradient-text">Me</span>
+        </h2>
+        <div className="w-16 h-1 rounded-full bg-gradient-to-r from-teal to-amber mx-auto mb-4" />
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-16">
+        {/* Profile Image Left */}
+        <div className="lg:col-span-5 flex justify-center">
+          <div className="relative group">
+            <div className="absolute -inset-1 rounded-3xl bg-gradient-to-tr from-teal/30 via-transparent to-amber/30 blur-lg opacity-70 group-hover:opacity-100 transition duration-500" />
             <img
               src="picofme (5).png"
-              alt="Profile"
-              className="rounded-3xl w-full max-w-xs shadow-xl hover:scale-105 transition-transform duration-300"
+              alt="Anand Kishore"
+              className="relative rounded-3xl w-64 sm:w-72 md:w-80 object-cover shadow-xl border border-zinc-200/80 dark:border-zinc-800 transition-transform duration-500 group-hover:scale-102"
             />
           </div>
+        </div>
 
-          {/* Bio Right */}
-          <div className="space-y-6">
-            <h3 className="text-2xl font-semibold mb-4 text-white">
-              I'm a <span className="gradient-text">Passionate</span> Full Stack
-              Developer
-            </h3>
-            <p className="text-gray-400 leading-relaxed">
-              I am a dedicated web developer with over 2 years of experience in
-              building functional and visually appealing websites and
-              applications that deliver exceptional user experiences.
-            </p>
-            <p className="text-gray-400 leading-relaxed">
-              My approach combines aesthetic design principles with clean,
-              efficient code to deliver solutions that not only look great but
-              also perform exceptionally well. I'm constantly learning and
-              exploring new technologies to stay at the forefront of web
-              development.
-            </p>
-            <div className="grid grid-cols-2 gap-4 text-gray-300">
-              {[
-                "UI/UX Design",
-                "Web Development",
-                "Mobile Apps",
-                "Branding",
-              ].map((item, idx) => (
-                <div key={idx} className="flex gap-2 items-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    className="text-teal"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                  <span>{item}</span>
-                </div>
-              ))}
+        {/* Bio Right */}
+        <div className="lg:col-span-7 space-y-5 text-left">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-teal/10 text-teal border border-teal/20">
+            Professional Overview • 3+ Years Experience
+          </div>
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">
+            I'm an <span className="gradient-text">AI & Full-Stack</span> Software Engineer
+          </h3>
+          <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+            Software Engineer with 3+ years of experience building enterprise and full-stack applications using Java, Spring Boot, React, REST APIs, SQL, Hibernate, and Oracle. Currently working at <strong>LabVantage Solutions, Inc</strong> as an AI Engineer / Associate Software Engineer, developing RAG-based chatbots and document agents using OpenAI, LangChain, Python, pgvector, MCP, AWS, and Docker.
+          </p>
+          <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+            Experienced in production troubleshooting, process automation, Agile delivery, and scalable application development. I also architected <strong>SERBOSEVA</strong>, an AI-powered home services marketplace serving 1,000+ users with 500+ professionals across 210+ services.
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2">
+            {highlights.map((item, idx) => (
+              <div key={idx} className="flex items-center gap-2 text-xs sm:text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                <CheckCircle2 className="w-4 h-4 text-teal flex-shrink-0" />
+                <span>{item}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Education Snippet */}
+          <div className="pt-3 border-t border-zinc-200/80 dark:border-zinc-800 flex items-center gap-3 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
+            <div className="w-8 h-8 rounded-lg bg-amber/10 text-amber flex items-center justify-center flex-shrink-0 border border-amber/20">
+              <GraduationCap className="w-4 h-4" />
+            </div>
+            <div>
+              <span className="font-semibold text-zinc-900 dark:text-zinc-100">B.Tech in Computer Science Engineering</span> — Haldia Institute of Technology (CGPA: 9.23 / 10)
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Skills */}
-        <div className="mb-20">
-          <h3 className="text-2xl font-semibold text-center mb-12 text-white">
-            My <span className="gradient-text">Skills</span>
-          </h3>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Frontend",
-                skills: [
-                  "HTML",
-                  "CSS",
-                  "JavaScript",
-                  "TypeScript",
-                  "React",
-                  "Next.js",
-                  "Tailwind",
-                  "Shadcn UI",
-                ],
-              },
-              {
-                title: "Backend",
-                skills: [
-                  "Node.js",
-                  "Express.js",
-                  "MongoDB",
-                  "PostgreSQL",
-                  "REST APIs",
-                  "WebSockets",
-                  "JWT",
-                ],
-              },
-              {
-                title: "Tools & Platforms",
-                skills: [
-                  "Git",
-                  "GitHub",
-                  "Docker",
-                  "AWS",
-                  "CI/CD",
-                  "Vercel",
-                  "Netlify",
-                  "Postman",
-                  "Render",
-                ],
-              },
-            ].map((group, index) => (
-              <div key={index}>
-                <h4 className="text-xl font-semibold mb-4 text-teal">
-                  {group.title}
-                </h4>
-                <div className="flex flex-wrap gap-3">
-                  {group.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-3 py-1 border border-gray-600 text-gray-300 text-sm rounded-full"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
+      {/* Services Section */}
+      <div className="mt-12 text-left">
+        <h3 className="text-xl sm:text-2xl font-bold text-zinc-900 dark:text-zinc-100 mb-6 text-center">
+          Core <span className="gradient-text">Competencies</span>
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {services.map((service, index) => (
+            <div
+              key={index}
+              className="p-6 rounded-2xl bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border border-zinc-200/80 dark:border-zinc-800/80 shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col"
+            >
+              <div className="w-12 h-12 rounded-xl bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center mb-4">
+                {service.icon}
               </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Services */}
-        <div className="mt-20">
-          <h3 className="text-2xl font-semibold text-center mb-12 text-white">
-            Services I <span className="gradient-text">Offer</span>
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <div
-                key={index}
-                className="glass-card p-6 transition-all duration-300 hover:translate-y-[-5px] hover:shadow-lg text-white"
-              >
-                <div className="mb-5 w-14 h-14 flex items-center justify-center rounded-full bg-dark-light">
-                  {service.icon}
-                </div>
-                <h4 className="text-xl font-semibold mb-3">{service.title}</h4>
-                <p className="text-gray-400">{service.description}</p>
-              </div>
-            ))}
-          </div>
+              <h4 className="text-base font-semibold text-zinc-900 dark:text-zinc-100 mb-2">
+                {service.title}
+              </h4>
+              <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                {service.description}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </section>

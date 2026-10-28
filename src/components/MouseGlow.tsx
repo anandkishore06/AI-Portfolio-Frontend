@@ -1,12 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 const MouseGlow = () => {
   const trailRef = useRef<HTMLDivElement>(null);
-  const [hue, setHue] = useState(0);
 
   useEffect(() => {
-    let animationFrame: number;
-
     const handleMouseMove = (e: MouseEvent) => {
       const trail = trailRef.current;
       if (!trail) return;
@@ -16,26 +13,17 @@ const MouseGlow = () => {
       trail.style.top = `${clientY}px`;
     };
 
-    const animateHue = () => {
-      setHue((prevHue) => (prevHue + 1) % 360);
-      animationFrame = requestAnimationFrame(animateHue);
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    animationFrame = requestAnimationFrame(animateHue);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      cancelAnimationFrame(animationFrame);
-    };
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
   return (
     <div
       ref={trailRef}
-      className="fixed z-50 pointer-events-none w-64 h-64 -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl opacity-30 transition-transform duration-200 ease-out"
+      className="fixed z-0 pointer-events-none w-80 h-80 -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl opacity-15 dark:opacity-20 transition-all duration-300 ease-out"
       style={{
-        background: `radial-gradient(circle, hsl(${hue}, 100%, 70%) 0%, transparent 70%)`,
+        background:
+          "radial-gradient(circle, rgba(78, 205, 196, 0.4) 0%, rgba(255, 189, 68, 0.15) 50%, transparent 75%)",
       }}
     />
   );

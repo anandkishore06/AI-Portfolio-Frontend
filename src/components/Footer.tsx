@@ -1,125 +1,76 @@
 import React from "react";
+import { ArrowUp } from "lucide-react";
+import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import AIIcon from "./AIIcon";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
-    <footer className="bg-dark py-12 border-t border-gray-dark bg-white text-black dark:bg-zinc-900 dark:text-white">
+    <footer className="w-full border-t border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-100/50 dark:bg-zinc-950/50 py-12 mt-16 transition-colors">
       <div className="container-custom">
-        <div className="flex flex-col gap-8 md:flex-row md:gap-0 justify-between items-start">
-          {/* Left Column */}
-          <div className="w-full md:w-1/2">
-            <div className="font-bold text-2xl gradient-text mb-3">
-              &#123;AK&#125; AI Portfolio.
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+          {/* Brand */}
+          <div className="flex flex-col items-center md:items-start gap-1">
+            <div className="flex items-center gap-2">
+              <span className="font-bold text-lg tracking-tight text-zinc-900 dark:text-zinc-100">
+                &#123;AK&#125; Anand Kishore
+              </span>
+              <span className="inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-teal/10 text-teal border border-teal/20 font-medium">
+                <AIIcon className="w-2.5 h-2.5" /> AI Portfolio
+              </span>
             </div>
-            <p className="max-w-full md:max-w-md  bg-white text-zinc-800 dark:bg-zinc-900 dark:text-white">
-              Creating beautiful digital experiences that leave a lasting
-              impression.
+            <p className="text-xs text-zinc-500 dark:text-zinc-400">
+              Crafting intelligent, high-performance digital experiences.
             </p>
           </div>
 
-          {/* Right Column */}
-          <div className="w-full md:w-1/2 text-center md:text-right">
-            <div className="flex flex-wrap justify-center md:justify-end gap-4 mb-4">
-              {/* Social Links */}
-              <a
-                href="https://www.linkedin.com/in/anandkishore060/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-teal transition-colors duration-200  bg-white text-zinc-800 dark:bg-zinc-900 dark:text-white"
-              >
-                {/* LinkedIn Icon */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                  <rect x="2" y="9" width="4" height="12"></rect>
-                  <circle cx="4" cy="4" r="2"></circle>
-                </svg>
-              </a>
-
-              <a
-                href="https://github.com/anandkishore06"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-teal transition-colors duration-200  bg-white text-zinc-800 dark:bg-zinc-900 dark:text-white"
-              >
-                {/* GitHub Icon */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M12 2c-5.52 0-10 4.48-10 10 0 4.42 2.87 8.17 6.84 9.49.5.09.68-.21.68-.47v-1.63c-2.69.58-3.26-1.31-3.26-1.31-.44-1.13-.88-1.43-.88-1.43-.72-.48.05-.47.05-.47 1.5.11 2.29 1.55 2.29 1.55 1.34 2.28 3.51 1.62 4.35 1.24.13-.97.52-1.62.95-2.00-2.84-.31-5.83-1.42-5.83-6.35 0-1.4.5-2.55 1.32-3.45-.13-.31-.58-1.55.12-3.24 0 0 1.08-.34 3.52 1.33 1.02-.29 2.1-.43 3.17-.43 1.07 0 2.14.14 3.16.43 2.43-1.67 3.51-1.33 3.51-1.33.7 1.7.25 2.93.12 3.24.82.89 1.32 2.05 1.32 3.45 0 4.94-3.01 6.04-5.85 6.35.54.46 1.03 1.37 1.03 2.73v4.1c0 .26.18.56.69.47C19.13 20.17 22 16.42 22 12c0-5.52-4.48-10-10-10z"></path>
-                </svg>
-              </a>
-
-              <a
-                href="https://x.com/anandkishore06"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-teal transition-colors duration-200  bg-white text-zinc-800 dark:bg-zinc-900 dark:text-white"
-              >
-                {/* Twitter Icon */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
-                </svg>
-              </a>
-            </div>
-
-            <p className="bg-white text-zinc-800 dark:bg-zinc-900 dark:text-white">
-              &copy; {currentYear} &#123;AK&#125; AI Portfolio. All rights
-              reserved.
-            </p>
+          {/* Social Links */}
+          <div className="flex items-center gap-2.5">
+            <a
+              href="https://github.com/anandkishore06"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2.5 rounded-xl bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:text-teal dark:hover:text-teal border border-zinc-200/80 dark:border-zinc-800 transition-colors shadow-2xs"
+              aria-label="GitHub profile"
+            >
+              <FaGithub className="w-4 h-4" />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/anandkishore060/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2.5 rounded-xl bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:text-teal dark:hover:text-teal border border-zinc-200/80 dark:border-zinc-800 transition-colors shadow-2xs"
+              aria-label="LinkedIn profile"
+            >
+              <FaLinkedin className="w-4 h-4" />
+            </a>
+            <a
+              href="https://x.com/anandkishore06"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2.5 rounded-xl bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:text-teal dark:hover:text-teal border border-zinc-200/80 dark:border-zinc-800 transition-colors shadow-2xs"
+              aria-label="Twitter profile"
+            >
+              <FaTwitter className="w-4 h-4" />
+            </a>
           </div>
         </div>
 
-        {/* Bottom Section */}
-        <div className="mt-8 pt-8 border-t border-gray-dark text-center px-4 sm:px-0">
-          <a
-            href="#home"
-            className="hover:text-teal inline-flex items-center transition-colors duration-200  bg-white text-zinc-800 dark:bg-zinc-900 dark:text-white"
+        {/* Bottom divider and back to top */}
+        <div className="mt-8 pt-6 border-t border-zinc-200/60 dark:border-zinc-800/60 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-zinc-500 dark:text-zinc-400">
+          <p>&copy; {currentYear} Anand Kishore. All rights reserved.</p>
+          <button
+            onClick={scrollToTop}
+            className="inline-flex items-center gap-1.5 hover:text-teal transition-colors group cursor-pointer"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="mr-2"
-            >
-              <path d="m18 15-6-6-6 6"></path>
-            </svg>
-            Back to top
-          </a>
+            <span>Back to top</span>
+            <ArrowUp className="w-3.5 h-3.5 transition-transform duration-200 group-hover:-translate-y-0.5" />
+          </button>
         </div>
       </div>
     </footer>
