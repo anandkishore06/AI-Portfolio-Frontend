@@ -548,7 +548,7 @@ What would you like to explore today?`,
               </div>
               <div>
                 <h2 className="text-lg font-bold">Interactive AI Ready</h2>
-                <p className="text-xs text-zinc-500 dark:text-zinc-400">Powered by Gemini & Portfolio Knowledge</p>
+                <p className="text-xs text-zinc-500 dark:text-zinc-400">Powered by AI & Portfolio Knowledge</p>
               </div>
             </div>
             <p className="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
