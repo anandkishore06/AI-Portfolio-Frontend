@@ -18,9 +18,9 @@ const Navbar = () => {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-4 sm:px-6 md:px-8 pt-3 sm:pt-4">
+    <header className="sticky top-0 left-0 right-0 w-full z-50 transition-all duration-300 px-4 sm:px-6 md:px-8 pt-3 sm:pt-4">
       {/* Subtle top fade mask so content fading behind floating pill never harshly peeks through top gap */}
-      <div className="fixed top-0 left-0 right-0 h-16 bg-gradient-to-b from-zinc-50/90 via-zinc-50/60 to-transparent dark:from-zinc-950/95 dark:via-zinc-950/60 dark:to-transparent pointer-events-none -z-10" />
+      <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-zinc-50/90 via-zinc-50/60 to-transparent dark:from-zinc-950/95 dark:via-zinc-950/60 dark:to-transparent pointer-events-none -z-10" />
 
       <div
         className={cn(
@@ -33,7 +33,14 @@ const Navbar = () => {
         {/* Brand / Logo */}
         <a
           href="#home"
-          className="group flex items-center gap-2.5 transition-transform duration-200 hover:scale-102"
+          onClick={(e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            if (window.location.hash) {
+              history.replaceState(null, "", window.location.pathname);
+            }
+          }}
+          className="group flex items-center gap-2.5 transition-transform duration-200 hover:scale-102 cursor-pointer"
         >
           <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-teal to-amber flex items-center justify-center text-zinc-950 font-bold text-sm shadow-sm group-hover:shadow-teal/20 group-hover:shadow-md transition-all">
             AK

@@ -60,15 +60,8 @@
     @apply bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100 antialiased selection:bg-teal/20 selection:text-teal;
     font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
-  /* globals.css or index.css */
   html {
-    overflow-x: hidden;
-    /* Offset fixed navbar so anchor scrolls & scroll-restoration don't hide content behind it */
     scroll-padding-top: 84px;
-  }
-
-  body {
-    overflow-x: hidden;
   }
 
   /* Custom scrollbar - sleek, modern & theme-adaptive */

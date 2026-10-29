@@ -479,7 +479,15 @@ What would you like to explore today?`,
     localStorage.removeItem("chatHistory");
   };
 
+  const isFirstRender = useRef(true);
+
   useEffect(() => {
+    // Only scroll into view when new messages are added during user interaction,
+    // not on initial page load / refresh when reading existing history from localStorage
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
     if (chatHistory.length === 0) return;
 
     // Smoothly scroll so the new response is visible without jumping or clipping
@@ -528,17 +536,16 @@ What would you like to explore today?`,
 
   return (
     <div
-      id="Home"
-      className="min-h-screen flex flex-col overflow-x-hidden bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 relative transition-colors duration-300 selection:bg-teal/20 selection:text-teal"
+      id="home"
+      className="min-h-screen flex flex-col bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 relative transition-colors duration-300 selection:bg-teal/20 selection:text-teal"
     >
       <Navbar />
-      {/* Navbar height spacer — gives the fixed navbar real space in the document flow
-          so content never scrolls behind it regardless of scroll position */}
-      <div className="h-[72px] sm:h-[76px] flex-shrink-0 pointer-events-none" aria-hidden="true" />
       <MouseGlow />
 
-      {/* Ambient background lighting */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[800px] h-[400px] bg-gradient-to-b from-teal/15 via-teal/5 to-transparent blur-3xl pointer-events-none -z-10 rounded-full" />
+      {/* Ambient background lighting — safely contained to prevent horizontal scroll */}
+      <div className="absolute top-0 left-0 right-0 h-[400px] overflow-hidden pointer-events-none -z-10">
+        <div className="w-[800px] h-[400px] mx-auto bg-gradient-to-b from-teal/15 via-teal/5 to-transparent blur-3xl rounded-full" />
+      </div>
 
       {showInitialPopup && (
         <motion.div
@@ -579,7 +586,7 @@ What would you like to explore today?`,
         </motion.div>
       )}
 
-      <main className="flex-grow px-3 sm:px-4 text-center overflow-x-hidden" id="home">
+      <main className="flex-grow px-3 sm:px-4 text-center">
         <div className="pt-8 sm:pt-10 md:pt-14 flex flex-col items-center justify-center gap-4 sm:gap-5 px-0 sm:px-4 md:px-0 max-w-3xl mx-auto w-full">
           {/* Greeting */}
           <motion.div
