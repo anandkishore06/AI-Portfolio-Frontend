@@ -527,7 +527,7 @@ What would you like to explore today?`,
       <MouseGlow />
 
       {/* Ambient background lighting */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-teal/15 via-teal/5 to-transparent blur-3xl pointer-events-none -z-10 rounded-full" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[800px] h-[400px] bg-gradient-to-b from-teal/15 via-teal/5 to-transparent blur-3xl pointer-events-none -z-10 rounded-full" />
 
       {showInitialPopup && (
         <motion.div
@@ -568,8 +568,8 @@ What would you like to explore today?`,
         </motion.div>
       )}
 
-      <main className="flex-grow px-4 text-center" id="home">
-        <div className="pt-32 sm:pt-36 md:pt-40 flex flex-col items-center justify-center gap-5 px-4 md:px-0 max-w-3xl mx-auto">
+      <main className="flex-grow px-3 sm:px-4 text-center overflow-x-hidden" id="home">
+        <div className="pt-24 sm:pt-28 md:pt-36 flex flex-col items-center justify-center gap-4 sm:gap-5 px-0 sm:px-4 md:px-0 max-w-3xl mx-auto w-full">
           {/* Greeting */}
           <motion.div
             initial={{ opacity: 0, y: -10 }}
@@ -590,19 +590,19 @@ What would you like to explore today?`,
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.4 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-white/70 dark:bg-zinc-900/70 backdrop-blur-md border border-zinc-200/80 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 shadow-2xs"
+            className="flex items-start sm:items-center gap-2 px-4 py-2 sm:py-1.5 rounded-2xl sm:rounded-full text-xs sm:text-sm font-medium bg-white/70 dark:bg-zinc-900/70 backdrop-blur-md border border-zinc-200/80 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 shadow-2xs max-w-full sm:max-w-[90%] text-left sm:text-center"
           >
-            <AIIcon className="w-3.5 h-3.5 text-teal flex-shrink-0" />
-            <span className="gradient-text font-semibold">{currentProfession}</span>
+            <AIIcon className="w-3.5 h-3.5 text-teal flex-shrink-0 mt-0.5 sm:mt-0" />
+            <span className="gradient-text font-semibold leading-snug">{currentProfession}</span>
           </motion.div>
 
           {/* Avatar with Halo */}
-          <div className="relative group my-2">
+          <div className="relative group my-1 sm:my-2">
             <div className="absolute -inset-1.5 rounded-full bg-gradient-to-tr from-teal via-teal/40 to-amber blur-md opacity-40 group-hover:opacity-75 transition-opacity duration-500" />
             <motion.img
               src="img1.png"
               alt="Anand Kishore"
-              className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 rounded-full object-cover ring-4 ring-white dark:ring-zinc-900 shadow-xl"
+              className="relative w-32 h-32 sm:w-44 sm:h-44 md:w-56 md:h-56 rounded-full object-cover ring-4 ring-white dark:ring-zinc-900 shadow-xl"
               initial={{ scale: 0.85, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
@@ -614,7 +614,7 @@ What would you like to explore today?`,
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="inline-flex flex-wrap items-center justify-center gap-1.5 px-4 sm:px-5 py-2.5 rounded-2xl border border-zinc-200/90 dark:border-zinc-800 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md shadow-xs text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 max-w-xl"
+            className="flex flex-wrap items-center justify-center gap-1 sm:gap-1.5 px-4 sm:px-5 py-2.5 rounded-2xl border border-zinc-200/90 dark:border-zinc-800 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md shadow-xs text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 w-full max-w-md sm:max-w-xl"
           >
             <span>Ask me anything about my</span>
             <span className="font-semibold text-teal">projects</span>,
@@ -626,7 +626,7 @@ What would you like to explore today?`,
           </motion.div>
         </div>
 
-        <div className="mt-8 mb-24 w-full md:w-[75%] mx-auto px-2 sm:px-4 md:px-6 flex flex-col">
+        <div className="mt-6 sm:mt-8 mb-24 w-full md:w-[75%] mx-auto px-0 sm:px-2 md:px-6 flex flex-col">
           <div
             className={cn("w-full space-y-6 transition-all", chatHistory.length > 0 && "py-4 sm:py-6")}
             ref={chatContainerRef}
