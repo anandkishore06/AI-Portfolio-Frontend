@@ -491,6 +491,14 @@ What would you like to explore today?`,
 
   useEffect(() => {
     setShowFooter(true);
+
+    // Disable browser scroll restoration so refreshing doesn't land the page
+    // mid-scroll (which hides the hero behind the fixed navbar)
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
+    // Always start at the very top on mount / refresh
+    window.scrollTo({ top: 0, left: 0 });
   }, []);
 
   const professions = [
