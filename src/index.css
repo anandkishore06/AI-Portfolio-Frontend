@@ -61,7 +61,13 @@
     font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
   /* globals.css or index.css */
-  html,
+  html {
+    overflow-x: hidden;
+    /* Offset fixed navbar so anchor scrolls & scroll-restoration don't hide content behind it */
+    scroll-padding-top: 84px;
+    scroll-behavior: smooth;
+  }
+
   body {
     overflow-x: hidden;
   }

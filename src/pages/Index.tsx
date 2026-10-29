@@ -568,7 +568,7 @@ What would you like to explore today?`,
         </motion.div>
       )}
 
-      <main className="flex-grow px-3 sm:px-4 text-center overflow-x-hidden" id="home">
+      <main className="flex-grow px-3 sm:px-4 text-center overflow-x-hidden [scroll-margin-top:84px]" id="home">
         <div className="pt-24 sm:pt-28 md:pt-36 flex flex-col items-center justify-center gap-4 sm:gap-5 px-0 sm:px-4 md:px-0 max-w-3xl mx-auto w-full">
           {/* Greeting */}
           <motion.div
