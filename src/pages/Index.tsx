@@ -532,6 +532,9 @@ What would you like to explore today?`,
       className="min-h-screen flex flex-col overflow-x-hidden bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 relative transition-colors duration-300 selection:bg-teal/20 selection:text-teal"
     >
       <Navbar />
+      {/* Navbar height spacer — gives the fixed navbar real space in the document flow
+          so content never scrolls behind it regardless of scroll position */}
+      <div className="h-[72px] sm:h-[76px] flex-shrink-0 pointer-events-none" aria-hidden="true" />
       <MouseGlow />
 
       {/* Ambient background lighting */}
@@ -576,8 +579,8 @@ What would you like to explore today?`,
         </motion.div>
       )}
 
-      <main className="flex-grow px-3 sm:px-4 text-center overflow-x-hidden [scroll-margin-top:84px]" id="home">
-        <div className="pt-24 sm:pt-28 md:pt-36 flex flex-col items-center justify-center gap-4 sm:gap-5 px-0 sm:px-4 md:px-0 max-w-3xl mx-auto w-full">
+      <main className="flex-grow px-3 sm:px-4 text-center overflow-x-hidden" id="home">
+        <div className="pt-8 sm:pt-10 md:pt-14 flex flex-col items-center justify-center gap-4 sm:gap-5 px-0 sm:px-4 md:px-0 max-w-3xl mx-auto w-full">
           {/* Greeting */}
           <motion.div
             initial={{ opacity: 0, y: -10 }}
