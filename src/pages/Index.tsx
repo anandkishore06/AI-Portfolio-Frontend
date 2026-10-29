@@ -11,6 +11,7 @@ import Footer from "@/components/Footer";
 import Skills from "@/components/Skills";
 import MouseGlow from "@/components/MouseGlow";
 import AIIcon from "@/components/AIIcon";
+import { SVGFollower } from "@/components/ui/svg-follower";
 
 interface Message {
   sender: "user" | "ai";
@@ -541,6 +542,12 @@ What would you like to explore today?`,
     >
       <Navbar />
       <MouseGlow />
+      <SVGFollower
+        fullScreen
+        className="opacity-70 dark:opacity-85 pointer-events-none"
+        colors={["#4ecdc4", "#ffbd44", "#ff6b6b", "#8b5cf6", "#38bdf8"]}
+        removeDelay={350}
+      />
 
       {/* Ambient background lighting — safely contained to prevent horizontal scroll */}
       <div className="absolute top-0 left-0 right-0 h-[400px] overflow-hidden pointer-events-none -z-10">
